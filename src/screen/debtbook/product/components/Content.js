@@ -20,9 +20,14 @@ function Content({
   setCostPrice,
   description,
   setDescription,
+  statusName,
+  statusPrice,
 }) {
   const [focus, setFocus] = useState('');
 
+  const handleFocus = value => {
+    setFocus(value);
+  };
   return (
     <View style={styles.container}>
       <View style={[styles.boxNameProduct]}>
@@ -42,11 +47,24 @@ function Content({
           placeholderTextColor="#8F9BA8"
           onChangeText={setName}
           value={name}
-          onFocus={() => setFocus('name')}
+          onFocus={() => handleFocus('name')}
         />
+        {statusName && (
+          <Text style={styles.textWarning}>Thông tin bắt buộc</Text>
+        )}
+
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <View style={styles.boxPrice}>
-            <Text>Giá bán *</Text>
+            <Text
+              style={[
+                styles.text,
+                {
+                  color:
+                    focus === 'price' ? COLORS.greenLighter : COLORS.blackLight,
+                },
+              ]}>
+              Giá bán <Text style={styles.textRed}>*</Text>
+            </Text>
             <TextInput
               style={styles.inputNameProduct}
               keyboardType="numeric"
@@ -54,10 +72,25 @@ function Content({
               placeholderTextColor="#8F9BA8"
               onChangeText={setPrice}
               value={price}
+              onFocus={() => handleFocus('price')}
             />
+            {statusPrice && (
+              <Text style={styles.textWarning}>Thông tin bắt buộc</Text>
+            )}
           </View>
           <View style={styles.boxPrice}>
-            <Text>Giá vốn</Text>
+            <Text
+              style={[
+                styles.text,
+                {
+                  color:
+                    focus === 'costPrice'
+                      ? COLORS.greenLighter
+                      : COLORS.blackLight,
+                },
+              ]}>
+              Giá vốn
+            </Text>
             <TextInput
               style={styles.inputNameProduct}
               keyboardType="numeric"
@@ -65,17 +98,30 @@ function Content({
               placeholderTextColor="#8F9BA8"
               onChangeText={setCostPrice}
               value={costPrice}
+              onFocus={() => handleFocus('costPrice')}
             />
           </View>
         </View>
         <View style={styles.boxDescription}>
-          <Text>Mô tả</Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                color:
+                  focus === 'description'
+                    ? COLORS.greenLighter
+                    : COLORS.blackLight,
+              },
+            ]}>
+            Mô tả
+          </Text>
           <TextInput
             style={styles.inputNameProduct}
             placeholder="Ví dụ: Mì ly hảo hảo chua cay"
             placeholderTextColor="#8F9BA8"
             onChangeText={setDescription}
             value={description}
+            onFocus={() => handleFocus('description')}
           />
         </View>
       </View>
@@ -111,6 +157,11 @@ const styles = StyleSheet.create({
   },
   textRed: {
     color: '#F23030',
+  },
+  textWarning: {
+    color: '#F23030',
+    fontSize: 12,
+    lineHeight: 18,
   },
 });
 export default Content;

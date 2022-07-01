@@ -1,4 +1,4 @@
-export const updateEmail = email => async dispatch => {
+export const CheckOTP = OTP => async dispatch => {
   try {
     dispatch({
       type: 'CAP_NHAP_EMAIL',

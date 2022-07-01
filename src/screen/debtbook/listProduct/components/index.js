@@ -18,6 +18,7 @@ import UpcScan from '../../../../assets/icon/UpcScan.svg';
 import MoreVertical from '../../../../assets/icon/MoreVertical.svg';
 import SortDown from '../../../../assets/icon/SortDown.svg';
 import ShareAndroid from '../../../../assets/icon/ShareAndroid.svg';
+import AddIcon from '../../../../assets/icon/AddIcon.svg';
 import HeaderProduct from './Header';
 import {useSelector} from 'react-redux';
 
@@ -106,8 +107,8 @@ const renderItem = ({item, index}) => {
       <View style={styles.boxDetailProduct}>
         <Text style={styles.nameProduct}>{item.name}</Text>
         <View style={styles.boxWarehouse}>
-          {/* <Text style={styles.quantityProduct}>Kho:{item.quantity}</Text> */}
-          {/* <Text style={styles.textType}>{item.type}</Text> */}
+          <Text style={styles.quantityProduct}>Kho:5</Text>
+          <Text style={styles.textType}>6 phân loại</Text>
         </View>
         <Text style={styles.price}>{item.price}₫</Text>
       </View>
@@ -117,7 +118,11 @@ const renderItem = ({item, index}) => {
 
 export default function ListProduct({navigation}) {
   const items = useSelector(state => state.personalInfo.items);
+
   console.log(items);
+  const createProduct = () => {
+    navigation.navigate('AddNewProduct');
+  };
   return (
     <SafeAreaView style={styles.container}>
       <HeaderProduct navigation={navigation} />
@@ -129,6 +134,10 @@ export default function ListProduct({navigation}) {
           showsVerticalScrollIndicator={false}
         />
       </View>
+      <TouchableOpacity style={styles.AddProduct} onPress={createProduct}>
+        <AddIcon />
+        <Text style={styles.textAddProduct}>Tạo sản phẩm</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -203,5 +212,23 @@ const styles = StyleSheet.create({
     right: 12,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  AddProduct: {
+    width: 203,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: COLORS.blueLight,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 12,
+    right: 16,
+  },
+  textAddProduct: {
+    fontSize: 16,
+    lineHeight: 24,
+    color: COLORS.whiteLight,
+    paddingLeft: 10,
   },
 });

@@ -13,12 +13,23 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import Logo from '../../../../assets/image/svg/logo.svg';
 import {COLORS, globalStyles} from '../../../../constants';
 import formatPhoneNumber from '../../../../utilities/formatPhoneNumber';
+import {useDispatch, useSelector} from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function OTPScreen({navigation}) {
   const [phone, setPhone] = useState('');
+  const [OTP, setOTP] = useState('');
+  const [count, setCount] = useState(0);
   const [countdown, setCountdown] = useState(30);
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
+  const phoneNumber = useSelector(state => state.personalInfo.phone);
+
+  const storeData = async () => {
+    try {
+      await AsyncStorage.setItem('Phone', phoneNumber);
+    } catch (error) {}
+  };
 
   useEffect(() => {
     clockCall = setInterval(() => {
@@ -28,7 +39,17 @@ function OTPScreen({navigation}) {
       clearInterval(clockCall);
     };
   });
-
+  useEffect(() => {
+    if (OTP.length === 4) {
+      console.log(OTP.length);
+      if (OTP === '1234') {
+        storeData();
+        navigation.navigate('Tabs');
+      } else {
+        setCount(pre => pre + 1);
+      }
+    }
+  }, [OTP]);
   const decrementClock = () => {
     if (countdown === 0) {
       setCountdown(0);
@@ -40,6 +61,9 @@ function OTPScreen({navigation}) {
   const handleReEnterPhone = () => {
     navigation.navigate('Login');
   };
+  const handleChangeOTP = value => {
+    setOTP(value);
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={[styles.img, {width: windowWidth}]}>
@@ -48,7 +72,7 @@ function OTPScreen({navigation}) {
           source={require('../../../../assets/image/png/Frame.png')}
         />
       </View>
-      <TextInput></TextInput>
+
       <View
         style={[styles.content, {width: windowWidth, height: windowHeight}]}>
         <Text style={styles.title}>Nhập mã xác thực</Text>
@@ -65,6 +89,8 @@ function OTPScreen({navigation}) {
           autoFocus={true}
           keyboardType="numeric"
           cellStyle={styles.otpInput}
+          onChange={handleChangeOTP}
+          value={OTP}
         />
         <Text style={styles.textWarning}>
           Mã xác thực không đúng. Vui lòng thử lại!

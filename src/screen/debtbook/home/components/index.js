@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {COLORS, globalStyles} from '../../../../constants';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import OverView from './overView';
 import Content from './content';
 import FloatingButton from './FloattingButton';
@@ -20,6 +21,17 @@ import Mess from '../../../../assets/icon/Mess.svg';
 import Bell from '../../../../assets/icon/Bell.svg';
 
 function Home({navigation}) {
+  // const retrieveData = async () => {
+  //   try {
+  //     const value = await AsyncStorage.getItem('Phone');
+  //     if (value !== null) {
+  //       console.log(value);
+  //     }
+  //   } catch (error) {}
+  // };
+  // useEffect(() => {
+  //   retrieveData();
+  // });
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>

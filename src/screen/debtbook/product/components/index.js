@@ -30,6 +30,8 @@ export default function AddNewProduct({navigation}) {
   const [price, setPrice] = useState('');
   const [costPrice, setCostPrice] = useState('');
   const [description, setDescription] = useState('');
+  const [statusName, setStatusName] = useState(false);
+  const [statusPrice, setStatusPrice] = useState(false);
   const [image, setImage] = useState([]);
 
   const data = {
@@ -44,6 +46,15 @@ export default function AddNewProduct({navigation}) {
     if (name !== '' && price !== '') {
       dispatch({type: 'UPDATE_PRODUCT', data});
       navigation.goBack();
+    } else {
+      if (name === '' && price === '') {
+        setStatusName(true);
+        setStatusPrice(true);
+      } else if (name === '') {
+        setStatusName(true);
+      } else {
+        setStatusPrice(true);
+      }
     }
   };
 
@@ -79,6 +90,8 @@ export default function AddNewProduct({navigation}) {
         setCostPrice={setCostPrice}
         description={description}
         setDescription={setDescription}
+        statusPrice={statusPrice}
+        statusName={statusName}
       />
       <View style={styles.bottom}>
         <TouchableOpacity style={styles.buttonAdd} onPress={updateProduct}>

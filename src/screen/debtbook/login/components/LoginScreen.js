@@ -13,14 +13,18 @@ import Logo from '../../../../assets/image/svg/logo.svg';
 import {COLORS, globalStyles} from '../../../../constants';
 import formatPhoneNumber from '../../../../utilities/formatPhoneNumber';
 import i18n from '../../../../assets/string/i18n';
-
+import {useDispatch} from 'react-redux';
 function LoginScreen({navigation}) {
+  const dispatch = useDispatch();
   const [phone, setPhone] = useState('');
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
   const {t} = i18n;
   const handleNext = () => {
-    navigation.navigate('OTPScreen');
+    if (phone.length === 10) {
+      dispatch({type: 'UPDATE_PHONE', phone: phone});
+      navigation.navigate('OTPScreen');
+    }
   };
   return (
     <SafeAreaView style={styles.container}>
