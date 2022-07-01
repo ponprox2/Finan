@@ -7,45 +7,88 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  FlatList,
+  BackHandler,
 } from 'react-native';
 import {COLORS, globalStyles} from '../../../../constants';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Content from './Content';
 import Bottom from './Bottom';
+import AddImage from './AddImage';
+import DialogAdd from './Dialog';
 import ChevronLeft from '../../../../assets/icon/ChevronLeft.svg';
+import Delete from '../../../../assets/icon/Delete.svg';
 import ImageFill from '../../../../assets/icon/ImageFill.svg';
 import CameraFill from '../../../../assets/icon/CameraFill.svg';
+import {useDispatch, useSelector} from 'react-redux';
 
-export default function AddNewProduct() {
+export default function AddNewProduct({navigation}) {
+  const dispatch = useDispatch();
+  const items = useSelector(state => state.personalInfo.items);
+  const [open, setOpen] = useState(false);
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState('');
+  const [costPrice, setCostPrice] = useState('');
+  const [description, setDescription] = useState('');
+  const [image, setImage] = useState([]);
+
+  const data = {
+    name: name,
+    price: price,
+    costPrice: costPrice,
+    description: description,
+    image: image,
+  };
+
+  const updateProduct = () => {
+    if (name !== '' && price !== '') {
+      dispatch({type: 'UPDATE_PRODUCT', data});
+      navigation.goBack();
+    }
+  };
+
+  useEffect(() => {
+    const backAction = () => {
+      setOpen(true);
+      return true;
+    };
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+  }, []);
+  const onOpenDialog = () => {
+    setOpen(true);
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <ChevronLeft />
+        <TouchableOpacity onPress={onOpenDialog}>
+          <ChevronLeft />
+        </TouchableOpacity>
+
         <Text style={styles.textCreateProduct}>Tạo sản phẩm</Text>
       </View>
-      <View style={styles.boxAddImage}>
-        <View>
-          <TouchableOpacity style={styles.addImage}>
-            <ImageFill />
-            <Text style={styles.textAddImage}>Thêm ảnh</Text>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <TouchableOpacity style={styles.shootImage}>
-            <ImageFill />
-            <Text style={styles.textAddImage}>Chụp ảnh</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <Content />
+      <AddImage image={image} setImage={setImage} />
+      <Content
+        name={name}
+        setName={setName}
+        price={price}
+        setPrice={setPrice}
+        costPrice={costPrice}
+        setCostPrice={setCostPrice}
+        description={description}
+        setDescription={setDescription}
+      />
       <View style={styles.bottom}>
-        <TouchableOpacity style={styles.buttonAdd}>
+        <TouchableOpacity style={styles.buttonAdd} onPress={updateProduct}>
           <Text style={styles.textAdd}>Tạo thêm</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonCreate}>
+        <TouchableOpacity style={styles.buttonCreate} onPress={updateProduct}>
           <Text style={styles.textCreate}>Hoàn tất</Text>
         </TouchableOpacity>
       </View>
+      <DialogAdd open={open} setOpen={setOpen} navigation={navigation} />
     </SafeAreaView>
   );
 }
@@ -53,7 +96,6 @@ export default function AddNewProduct() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // position: 'relative',
   },
   header: {
     width: '100%',
@@ -74,6 +116,8 @@ const styles = StyleSheet.create({
   },
   boxAddImage: {
     marginLeft: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   addImage: {
     ...globalStyles.rowCenter,
@@ -143,5 +187,30 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     lineHeight: 22,
     color: COLORS.primaryWhite2,
+  },
+  textIndexImage: {
+    width: 20,
+    height: 20,
+    borderRadius: 50,
+    borderColor: COLORS.primaryGreen,
+    borderWidth: 1,
+    backgroundColor: COLORS.primaryWhite2,
+    textAlign: 'center',
+    color: COLORS.primaryGreen,
+  },
+  boxButtonAcctionImage: {
+    marginRight: 14,
+  },
+  boxImage: {
+    position: 'absolute',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 82,
+    marginTop: 6,
+    paddingLeft: 6,
+    paddingRight: 6,
+  },
+  superBoxImage: {
+    marginRight: 8,
   },
 });

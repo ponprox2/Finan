@@ -11,15 +11,38 @@ import {
 import {COLORS, globalStyles} from '../../../../constants';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
-export default function Content() {
+function Content({
+  name,
+  setName,
+  price,
+  setPrice,
+  costPrice,
+  setCostPrice,
+  description,
+  setDescription,
+}) {
+  const [focus, setFocus] = useState('');
+
   return (
     <View style={styles.container}>
-      <View style={styles.boxNameProduct}>
-        <Text>Tên sản phẩm *</Text>
+      <View style={[styles.boxNameProduct]}>
+        <Text
+          style={[
+            styles.text,
+            {color: focus === 'name' ? COLORS.greenLighter : COLORS.blackLight},
+          ]}>
+          Tên sản phẩm <Text style={styles.textRed}>*</Text>
+        </Text>
         <TextInput
-          style={styles.inputNameProduct}
+          style={[
+            styles.inputNameProduct,
+            {borderColor: focus === 'name' ? COLORS.greenLighter : '#DDE1E5'},
+          ]}
           placeholder="Ví dụ: Mì Hảo Hảo"
           placeholderTextColor="#8F9BA8"
+          onChangeText={setName}
+          value={name}
+          onFocus={() => setFocus('name')}
         />
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <View style={styles.boxPrice}>
@@ -29,6 +52,8 @@ export default function Content() {
               keyboardType="numeric"
               placeholder="0"
               placeholderTextColor="#8F9BA8"
+              onChangeText={setPrice}
+              value={price}
             />
           </View>
           <View style={styles.boxPrice}>
@@ -38,6 +63,8 @@ export default function Content() {
               keyboardType="numeric"
               placeholder="0"
               placeholderTextColor="#8F9BA8"
+              onChangeText={setCostPrice}
+              value={costPrice}
             />
           </View>
         </View>
@@ -47,6 +74,8 @@ export default function Content() {
             style={styles.inputNameProduct}
             placeholder="Ví dụ: Mì ly hảo hảo chua cay"
             placeholderTextColor="#8F9BA8"
+            onChangeText={setDescription}
+            value={description}
           />
         </View>
       </View>
@@ -76,4 +105,12 @@ const styles = StyleSheet.create({
     marginTop: 12,
     marginBottom: 12,
   },
+  text: {
+    fontSize: 15,
+    lineHeight: 22,
+  },
+  textRed: {
+    color: '#F23030',
+  },
 });
+export default Content;

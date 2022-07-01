@@ -19,7 +19,7 @@ import QRCode from '../../../../assets/icon/QRCode.svg';
 import Mess from '../../../../assets/icon/Mess.svg';
 import Bell from '../../../../assets/icon/Bell.svg';
 
-function Home() {
+function Home({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -49,8 +49,8 @@ function Home() {
         </View>
       </View>
       <OverView />
-      <Content />
-      <FloatingButton />
+      <Content navigation={navigation} />
+      <FloatingButton navigation={navigation} />
     </SafeAreaView>
   );
 }

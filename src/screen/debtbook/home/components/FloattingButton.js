@@ -4,7 +4,7 @@ import {FloatingAction} from 'react-native-floating-action';
 import CreateOrder from '../../../../assets/icon/CreateOrder.svg';
 import {COLORS, globalStyles} from '../../../../constants/index';
 
-function FloatingButton() {
+function FloatingButton({navigation}) {
   const actions = [
     {
       text: 'Tạo đơn hàng',
@@ -14,14 +14,19 @@ function FloatingButton() {
       color: COLORS.primaryWhite2,
     },
   ];
-
+  const openCreateProduct = () => {
+    navigation.navigate('AddNewProduct');
+  };
   const open = () => {
     console.log('123123');
   };
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.example}>Floating Action example</Text> */}
-      <FloatingAction actions={actions} onPressItem={open} />
+      <FloatingAction
+        actions={actions}
+        onPressItem={open}
+        onPressItem={openCreateProduct}
+      />
     </View>
   );
 }

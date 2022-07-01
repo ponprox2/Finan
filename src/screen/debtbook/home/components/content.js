@@ -28,41 +28,55 @@ const arrData = [
   {
     icon: <OrderIcon />,
     text: 'Đơn hàng',
+    event: 'CreateOrder',
   },
   {
     icon: <ReportIcon />,
     text: 'Báo cáo',
+    event: 'CreateOrder',
   },
   {
     icon: <ProductIcon />,
     text: 'Sản phẩm',
+    event: 'ListProduct',
   },
   {
     icon: <VoucherIcon />,
     text: 'Khuyến mãi',
+    event: 'CreateOrder',
   },
   {
     icon: <GiftIcon />,
     text: 'Tạo đơn',
+    event: 'CreateOrder',
   },
   {
     icon: <CustomerIcon />,
     text: 'Quà tặng',
+    event: 'CreateOrder',
   },
   {
     icon: <Orther />,
     text: 'Khác',
+    event: 'CreateOrder',
   },
 ];
 
-export default function Content() {
+export default function Content({navigation}) {
+  const handleClick = value => {
+    navigation.navigate(value);
+  };
+
   return (
     <View style={styles.container}>
       {arrData.map((value, index) => (
-        <View style={styles.boxContent} key={index}>
+        <TouchableOpacity
+          style={styles.boxContent}
+          key={index}
+          onPress={() => handleClick(value.event)}>
           {value.icon}
           <Text style={styles.text}>{value.text}</Text>
-        </View>
+        </TouchableOpacity>
       ))}
     </View>
   );
