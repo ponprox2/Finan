@@ -1,4 +1,4 @@
-export const CheckOTP = OTP => async dispatch => {
+export const StatusSortProduct = statusSort => async dispatch => {
   try {
     dispatch({
       type: 'CAP_NHAP_EMAIL',
@@ -8,11 +8,13 @@ export const CheckOTP = OTP => async dispatch => {
     console.log(e);
   }
 };
-export const updateAddress = address => async dispatch => {
+
+
+export const SortProduct = statusSort => async dispatch => {
   try {
     dispatch({
-      type: 'CAP_NHAP_ADDRESS',
-      address: address,
+      type: 'SORT_PRODUCT',
+      email: email,
     });
   } catch (e) {
     console.log(e);

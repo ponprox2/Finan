@@ -15,7 +15,7 @@ function Appnavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="ListProduct"
+        initialRouteName="Tabs"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="OTPScreen" component={OTPScreen} />

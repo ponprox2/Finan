@@ -21,17 +21,17 @@ import Mess from '../../../../assets/icon/Mess.svg';
 import Bell from '../../../../assets/icon/Bell.svg';
 
 function Home({navigation}) {
-  // const retrieveData = async () => {
-  //   try {
-  //     const value = await AsyncStorage.getItem('Phone');
-  //     if (value !== null) {
-  //       console.log(value);
-  //     }
-  //   } catch (error) {}
-  // };
-  // useEffect(() => {
-  //   retrieveData();
-  // });
+  const retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('Phone');
+      if (value !== null) {
+        console.log(value);
+      }
+    } catch (error) {}
+  };
+  useEffect(() => {
+    retrieveData();
+  });
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>

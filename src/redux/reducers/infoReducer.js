@@ -1,15 +1,22 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 const initialState = {
-  items: [],
+  items: [
+    {
+      costPrice: '',
+      description: '',
+      image: '',
+      name: 'mi tom',
+      price: '124',
+    },
+    {
+      costPrice: '',
+      description: '',
+      image: '',
+      name: 'banh mi',
+      price: '123',
+    },
+  ],
   phone: '',
   OTP: '',
-};
-
-const storeData = async phone => {
-  try {
-    await AsyncStorage.setItem('@Phone', phone);
-  } catch (error) {}
 };
 
 export default function actionInfoReducer(state = initialState, payload) {
@@ -29,9 +36,16 @@ export default function actionInfoReducer(state = initialState, payload) {
         ...state,
         OTP: payload.OTP,
       };
-    case 'CHECK_OTP':
-      if (payload.OTP === '1234') return storeData(payload.phone);
-
+    case 'SORT_PRODUCT':
+      // console.log(payload.statusSort, payload?.items);
+      if (payload.statusSort === 1) {
+        payload.items?.sort((a, b) => b.price - a.price);
+      } else if (payload.statusSort === 2) {
+        payload.items?.sort((a, b) => a.price - b.price);
+      } else if (payload.statusSort === 3) {
+        payload.items?.sort((a, b) => b.name - a.name);
+      }
+      return {...state, items: payload?.items};
     default:
       return state;
   }

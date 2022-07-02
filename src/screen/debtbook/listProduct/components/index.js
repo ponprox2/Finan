@@ -117,15 +117,27 @@ const renderItem = ({item, index}) => {
 };
 
 export default function ListProduct({navigation}) {
+  const [isSelected, setSelection] = useState(3);
+  // const [items, setItems] = useState([]);
   const items = useSelector(state => state.personalInfo.items);
 
   console.log(items);
+  useEffect(() => {
+    // setItems(temp);
+  }, [isSelected]);
+
   const createProduct = () => {
     navigation.navigate('AddNewProduct');
   };
+
+  // console.log(items);
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderProduct navigation={navigation} />
+      <HeaderProduct
+        navigation={navigation}
+        setSelection={setSelection}
+        isSelected={isSelected}
+      />
       <View style={styles.listProudct}>
         <FlatList
           data={items}

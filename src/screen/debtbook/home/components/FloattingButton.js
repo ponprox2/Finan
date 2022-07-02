@@ -7,9 +7,9 @@ import {COLORS, globalStyles} from '../../../../constants/index';
 function FloatingButton({navigation}) {
   const actions = [
     {
-      text: 'Tạo đơn hàng',
+      text: 'Tạo sản phẩm',
       icon: <CreateOrder />,
-      name: 'Tạo đơn hàng',
+      name: 'Tạo sản phẩm',
       position: 2,
       color: COLORS.primaryWhite2,
     },
@@ -22,11 +22,7 @@ function FloatingButton({navigation}) {
   };
   return (
     <View style={styles.container}>
-      <FloatingAction
-        actions={actions}
-        onPressItem={open}
-        onPressItem={openCreateProduct}
-      />
+      <FloatingAction actions={actions} onPressItem={openCreateProduct} />
     </View>
   );
 }

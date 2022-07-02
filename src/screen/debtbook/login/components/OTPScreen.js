@@ -19,6 +19,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 function OTPScreen({navigation}) {
   const [phone, setPhone] = useState('');
   const [OTP, setOTP] = useState('');
+  const [statusOTP, setStatusOTP] = useState(false);
+  const [status, setStatus] = useState(false);
   const [count, setCount] = useState(0);
   const [countdown, setCountdown] = useState(30);
   const windowWidth = Dimensions.get('window').width;
@@ -40,14 +42,21 @@ function OTPScreen({navigation}) {
     };
   });
   useEffect(() => {
-    if (OTP.length === 4) {
-      console.log(OTP.length);
-      if (OTP === '1234') {
-        storeData();
-        navigation.navigate('Tabs');
-      } else {
-        setCount(pre => pre + 1);
+    if (count !== 5) {
+      if (OTP.length === 4) {
+        if (OTP === '1234') {
+          storeData();
+          navigation.navigate('Tabs');
+        } else {
+          setStatusOTP(true);
+          setCount(pre => pre + 1);
+          setOTP('');
+        }
       }
+    } else {
+      setStatusOTP(false);
+      setStatus(true);
+      setOTP('');
     }
   }, [OTP]);
   const decrementClock = () => {
@@ -80,7 +89,7 @@ function OTPScreen({navigation}) {
           Mã xác thực đã được gửi đến số điện thoại
         </Text>
         <View style={styles.boxPhone}>
-          <Text style={styles.phone}>0913123123 </Text>
+          <Text style={styles.phone}>{phoneNumber} </Text>
           <Text style={styles.text}>của quý khách</Text>
         </View>
         <OTPInput
@@ -92,9 +101,16 @@ function OTPScreen({navigation}) {
           onChange={handleChangeOTP}
           value={OTP}
         />
-        <Text style={styles.textWarning}>
-          Mã xác thực không đúng. Vui lòng thử lại!
-        </Text>
+        {statusOTP && (
+          <Text style={styles.textWarning}>
+            Mã xác thực không đúng. Vui lòng thử lại!
+          </Text>
+        )}
+        {status && (
+          <Text style={styles.textWarning}>
+            Tài khoản bị khoá tạm thời, thử lại sau 5 phút
+          </Text>
+        )}
         <View style={[styles.sendOTP, {width: windowWidth}]}>
           <View style={styles.send}>
             {countdown === 0 ? (
