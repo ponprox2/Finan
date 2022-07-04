@@ -37,7 +37,7 @@ const arr = [
 
 const renderItem = ({item, index}) => {
   return (
-    <View style={styles.containerBox}>
+    <View style={[styles.containerBox, {paddingRight: index === 2 ? 8 : 0}]}>
       <View style={styles.BoxDetailOverView}>
         <View style={styles.BoxHeadertext}>
           {item.icon}
@@ -139,6 +139,7 @@ const styles = StyleSheet.create({
   },
   containerBox: {
     flexDirection: 'row',
+    // paddingRight: 16,
   },
 });
 

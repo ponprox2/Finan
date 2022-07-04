@@ -39,15 +39,30 @@ var radio_props = [
   {label: 'Từ A -> Z', value: 3},
 ];
 export default function HeaderProduct({navigation, setSelection, isSelected}) {
+  const [typeSelect, setTypeSelect] = useState('');
   const items = useSelector(state => state.personalInfo.items);
- 
+  // const statusSort = useSelector(state => state.personalInfo.statusSort);
   const dispatch = useDispatch();
   const handleBack = () => {
     navigation.goBack();
   };
+
   useEffect(() => {
     dispatch({type: 'SORT_PRODUCT', statusSort: isSelected, items: items});
-  }, [isSelected]);
+  }, [isSelected, items.length]);
+
+  const onSearch = () => {
+    setTypeSelect('search');
+  };
+  const onScan = () => {
+    setTypeSelect('scan');
+  };
+  const onSort = () => {
+    setTypeSelect('sort');
+  };
+  const onMoreVertical = () => {
+    setTypeSelect('moreVertical');
+  };
   return (
     <View style={styles.header}>
       <View style={styles.leftHeader}>
@@ -57,28 +72,27 @@ export default function HeaderProduct({navigation, setSelection, isSelected}) {
         <Text style={styles.textProduct}>Sản phẩm</Text>
       </View>
       <View style={styles.rightHeader}>
-        <TouchableOpacity style={styles.iconHeader}>
-          <SearchIcon fill={'#30373D'} />
+        <TouchableOpacity style={styles.iconHeader} onPress={onSearch}>
+          <SearchIcon fill={typeSelect === 'search' ? '#00A64C' : '#30373D'} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconHeader}>
-          <UpcScan fill={'#30373D'} />
+        <TouchableOpacity style={styles.iconHeader} onPress={onScan}>
+          <UpcScan fill={typeSelect === 'scan' ? '#00A64C' : '#30373D'} />
         </TouchableOpacity>
 
         <Menu>
-          <MenuTrigger style={[styles.button]}>
-            <SortDown fill={'#30373D'} />
+          <MenuTrigger style={[styles.button]} onPress={onSort}>
+            <SortDown fill={typeSelect === 'sort' ? '#00A64C' : '#30373D'} />
           </MenuTrigger>
           <MenuOptions style={styles.menu}>
             <ScrollView
               contentContainerStyle={{
-                // alignItems: 'center',
                 maxHeight: 200,
               }}
               showsVerticalScrollIndicator={false}>
               <RadioForm
+                style={styles.radio}
                 radio_props={radio_props}
                 buttonColor={'#DDE1E5'}
-                // labelColor={'#50C900'}
                 initial={0}
                 onPress={value => {
                   setSelection(value);
@@ -88,8 +102,10 @@ export default function HeaderProduct({navigation, setSelection, isSelected}) {
           </MenuOptions>
         </Menu>
 
-        <TouchableOpacity style={styles.iconOther}>
-          <MoreVertical fill={'#30373D'} />
+        <TouchableOpacity style={styles.iconOther} onPress={onMoreVertical}>
+          <MoreVertical
+            fill={typeSelect === 'moreVertical' ? '#00A64C' : '#30373D'}
+          />
         </TouchableOpacity>
       </View>
     </View>
@@ -131,5 +147,27 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     // backgroundColor: 'red',
     alignItems: 'center',
+  },
+  menu: {
+    position: 'absolute',
+    marginTop: 41,
+    backgroundColor: COLORS.primaryWhite2,
+    width: 226,
+    height: 192,
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  radio: {
+    height: '100%',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    paddingLeft: 18,
   },
 });

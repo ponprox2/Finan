@@ -1,22 +1,9 @@
 const initialState = {
-  items: [
-    {
-      costPrice: '',
-      description: '',
-      image: '',
-      name: 'mi tom',
-      price: '124',
-    },
-    {
-      costPrice: '',
-      description: '',
-      image: '',
-      name: 'banh mi',
-      price: '123',
-    },
-  ],
+  items: [],
   phone: '',
   OTP: '',
+  statusSort: 1,
+  listPhoneBanned: [],
 };
 
 export default function actionInfoReducer(state = initialState, payload) {
@@ -37,15 +24,23 @@ export default function actionInfoReducer(state = initialState, payload) {
         OTP: payload.OTP,
       };
     case 'SORT_PRODUCT':
-      // console.log(payload.statusSort, payload?.items);
-      if (payload.statusSort === 1) {
-        payload.items?.sort((a, b) => b.price - a.price);
-      } else if (payload.statusSort === 2) {
-        payload.items?.sort((a, b) => a.price - b.price);
-      } else if (payload.statusSort === 3) {
-        payload.items?.sort((a, b) => b.name - a.name);
+      const data = [...payload.items];
+      const statusSort = payload.statusSort;
+      if (statusSort === 0) {
+        data.sort((a, b) => b.create_At - a.create_At);
+      } else if (statusSort === 1) {
+        data.sort((a, b) => b.price - a.price);
+      } else if (statusSort === 2) {
+        data.sort((a, b) => a.price - b.price);
+      } else if (statusSort === 3) {
+        data.sort((a, b) => a.name.localeCompare(b.name));
       }
-      return {...state, items: payload?.items};
+      return {...state, items: data, statusSort: statusSort};
+    case 'UPDATE_PHONENUMBER_BAN':
+      return {
+        ...state,
+        listPhoneBanned: [...state.listPhoneBanned, payload.phoneBan],
+      };
     default:
       return state;
   }

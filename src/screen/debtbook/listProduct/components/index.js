@@ -20,7 +20,7 @@ import SortDown from '../../../../assets/icon/SortDown.svg';
 import ShareAndroid from '../../../../assets/icon/ShareAndroid.svg';
 import AddIcon from '../../../../assets/icon/AddIcon.svg';
 import HeaderProduct from './Header';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 const arr = [
   {
@@ -105,7 +105,9 @@ const renderItem = ({item, index}) => {
         </TouchableOpacity>
       </View>
       <View style={styles.boxDetailProduct}>
-        <Text style={styles.nameProduct}>{item.name}</Text>
+        <Text style={styles.nameProduct} numberOfLines={1}>
+          {item.name}
+        </Text>
         <View style={styles.boxWarehouse}>
           <Text style={styles.quantityProduct}>Kho:5</Text>
           <Text style={styles.textType}>6 phân loại</Text>
@@ -117,20 +119,18 @@ const renderItem = ({item, index}) => {
 };
 
 export default function ListProduct({navigation}) {
-  const [isSelected, setSelection] = useState(3);
-  // const [items, setItems] = useState([]);
+  const statusSort = useSelector(state => state.personalInfo.statusSort);
+  const [isSelected, setSelection] = useState(statusSort);
+  const dispatch = useDispatch();
   const items = useSelector(state => state.personalInfo.items);
 
-  console.log(items);
-  useEffect(() => {
-    // setItems(temp);
-  }, [isSelected]);
+
 
   const createProduct = () => {
     navigation.navigate('AddNewProduct');
   };
 
-  // console.log(items);
+
   return (
     <SafeAreaView style={styles.container}>
       <HeaderProduct
@@ -159,8 +159,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listProudct: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    paddingLeft: 16,
+    paddingRight: 16,
     margin: 8,
     marginLeft: 8,
     marginBottom: 60,

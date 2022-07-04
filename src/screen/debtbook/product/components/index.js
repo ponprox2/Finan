@@ -43,14 +43,38 @@ export default function AddNewProduct({navigation}) {
   };
 
   const updateProduct = () => {
-    if (name !== '' && price !== '') {
-      dispatch({type: 'UPDATE_PRODUCT', data});
-      navigation.goBack();
+    if (name.trim() !== '' && price !== '') {
+      dispatch({
+        type: 'UPDATE_PRODUCT',
+        data: {...data, create_At: new Date()},
+      });
+      setName('');
+      setPrice('');
+      setCostPrice('');
+      setDescription('');
     } else {
-      if (name === '' && price === '') {
+      if (name.trim() === '' && price === '') {
         setStatusName(true);
         setStatusPrice(true);
-      } else if (name === '') {
+      } else if (name.trim() === '') {
+        setStatusName(true);
+      } else {
+        setStatusPrice(true);
+      }
+    }
+  };
+  const updateProductAndBack = () => {
+    if (name.trim() !== '' && price !== '') {
+      dispatch({
+        type: 'UPDATE_PRODUCT',
+        data: {...data, create_At: new Date()},
+      });
+      navigation.goBack();
+    } else {
+      if (name.trim() === '' && price === '') {
+        setStatusName(true);
+        setStatusPrice(true);
+      } else if (name.trim() === '') {
         setStatusName(true);
       } else {
         setStatusPrice(true);
@@ -97,7 +121,9 @@ export default function AddNewProduct({navigation}) {
         <TouchableOpacity style={styles.buttonAdd} onPress={updateProduct}>
           <Text style={styles.textAdd}>Tạo thêm</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonCreate} onPress={updateProduct}>
+        <TouchableOpacity
+          style={styles.buttonCreate}
+          onPress={updateProductAndBack}>
           <Text style={styles.textCreate}>Hoàn tất</Text>
         </TouchableOpacity>
       </View>

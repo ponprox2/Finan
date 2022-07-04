@@ -17,6 +17,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function OTPScreen({navigation}) {
+  const dispatch = useDispatch();
   const [phone, setPhone] = useState('');
   const [OTP, setOTP] = useState('');
   const [statusOTP, setStatusOTP] = useState(false);
@@ -26,6 +27,9 @@ function OTPScreen({navigation}) {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
   const phoneNumber = useSelector(state => state.personalInfo.phone);
+  const listPhoneBanned = useSelector(
+    state => state.personalInfo.listPhoneBanned,
+  );
 
   const storeData = async () => {
     try {
@@ -33,6 +37,14 @@ function OTPScreen({navigation}) {
     } catch (error) {}
   };
 
+  useEffect(() => {
+    const checkBan = listPhoneBanned.some(x => x === phoneNumber);
+
+    if (checkBan) {
+      console.log(checkBan);
+      setStatus(true);
+    }
+  }, []);
   useEffect(() => {
     clockCall = setInterval(() => {
       decrementClock();
@@ -57,8 +69,10 @@ function OTPScreen({navigation}) {
       setStatusOTP(false);
       setStatus(true);
       setOTP('');
+      dispatch({type: 'UPDATE_PHONENUMBER_BAN', phoneBan: phoneNumber});
     }
   }, [OTP]);
+
   const decrementClock = () => {
     if (countdown === 0) {
       setCountdown(0);
@@ -67,6 +81,7 @@ function OTPScreen({navigation}) {
       setCountdown(countdown - 1);
     }
   };
+
   const handleReEnterPhone = () => {
     navigation.navigate('Login');
   };

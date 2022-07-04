@@ -24,6 +24,7 @@ const arrData = [
   {
     icon: <CreateOrder />,
     text: 'Tạo đơn',
+    event: 'CreateOrder',
   },
   {
     icon: <OrderIcon />,
@@ -84,7 +85,8 @@ export default function Content({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: 14,
+    paddingLeft: 8,
+    paddingRight: 10,
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
@@ -95,8 +97,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 6,
-    marginLeft: 8,
-    marginTop: 8,
+    marginLeft: 12,
+    marginTop: 10,
+
     shadowOffset: {
       width: 0,
       height: 2,
