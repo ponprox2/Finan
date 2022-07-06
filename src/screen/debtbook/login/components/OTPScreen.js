@@ -15,8 +15,10 @@ import {COLORS, globalStyles} from '../../../../constants';
 import formatPhoneNumber from '../../../../utilities/formatPhoneNumber';
 import {useDispatch, useSelector} from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import i18n from '../../../../assets/string/i18n';
 
 function OTPScreen({navigation}) {
+  const {t} = i18n;
   const dispatch = useDispatch();
   const [phone, setPhone] = useState('');
   const [OTP, setOTP] = useState('');
@@ -56,9 +58,9 @@ function OTPScreen({navigation}) {
   useEffect(() => {
     if (count !== 5) {
       if (OTP.length === 4) {
-        if (OTP === '1234') {
+        if (OTP === '1234' && status === false) {
           storeData();
-          navigation.navigate('Tabs');
+          navigation.navigate('BottomTabNav');
         } else {
           setStatusOTP(true);
           setCount(pre => pre + 1);
@@ -72,7 +74,6 @@ function OTPScreen({navigation}) {
       dispatch({type: 'UPDATE_PHONENUMBER_BAN', phoneBan: phoneNumber});
     }
   }, [OTP]);
-
   const decrementClock = () => {
     if (countdown === 0) {
       setCountdown(0);
@@ -81,7 +82,6 @@ function OTPScreen({navigation}) {
       setCountdown(countdown - 1);
     }
   };
-
   const handleReEnterPhone = () => {
     navigation.navigate('Login');
   };
@@ -99,13 +99,11 @@ function OTPScreen({navigation}) {
 
       <View
         style={[styles.content, {width: windowWidth, height: windowHeight}]}>
-        <Text style={styles.title}>Nhập mã xác thực</Text>
-        <Text style={styles.text}>
-          Mã xác thực đã được gửi đến số điện thoại
-        </Text>
+        <Text style={styles.title}>{t(`enterCode`)}</Text>
+        <Text style={styles.text}>{t(`codeSendPhoneNumber`)}</Text>
         <View style={styles.boxPhone}>
           <Text style={styles.phone}>{phoneNumber} </Text>
-          <Text style={styles.text}>của quý khách</Text>
+          <Text style={styles.text}>{t(`custome`)}</Text>
         </View>
         <OTPInput
           otpLength={4}
@@ -118,34 +116,30 @@ function OTPScreen({navigation}) {
         />
         {statusOTP && (
           <Text style={styles.textWarning}>
-            Mã xác thực không đúng. Vui lòng thử lại!
+            {t(`verificationCodeIsIncorrect`)}
           </Text>
         )}
-        {status && (
-          <Text style={styles.textWarning}>
-            Tài khoản bị khoá tạm thời, thử lại sau 5 phút
-          </Text>
-        )}
+        {status && <Text style={styles.textWarning}>{t(`bannedAccount`)}</Text>}
         <View style={[styles.sendOTP, {width: windowWidth}]}>
           <View style={styles.send}>
             {countdown === 0 ? (
               <TouchableOpacity onPress={() => setCountdown(30)}>
-                <Text>Gửi lại mã xác thực</Text>
+                <Text>{t(`reSendCode`)}</Text>
               </TouchableOpacity>
             ) : (
               <>
-                <Text style={styles.resendOTP}>Gữi lại mã sau </Text>
+                <Text style={styles.resendOTP}>{t(`reSendCodeTime`)} </Text>
                 <Text style={styles.second}>{countdown}s</Text>
               </>
             )}
           </View>
           <TouchableOpacity onPress={handleReEnterPhone}>
-            <Text style={styles.readdPhone}>Nhập lại số điện thoại</Text>
+            <Text style={styles.readdPhone}>{t(`reEnterPhoneNumber`)}</Text>
           </TouchableOpacity>
         </View>
         <View style={[styles.bottom, {bottom: windowHeight - 490}]}>
           <Logo />
-          <Text>An toàn & bảo mật 100%</Text>
+          <Text>{t(`safe`)}</Text>
         </View>
       </View>
     </SafeAreaView>

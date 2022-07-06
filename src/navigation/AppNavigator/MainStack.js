@@ -10,11 +10,11 @@ const Stack = createStackNavigator();
 function MainStack() {
   return (
     <Stack.Navigator
-      initialRouteName="Tabs"
+      initialRouteName="BottomTabNav"
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="AddNewProduct" component={AddNewProduct} />
       <Stack.Screen name="ListProduct" component={ListProduct} />
-      <Stack.Screen name="Tabs" component={Tabs} />
+      <Stack.Screen name="BottomTabNav" component={Tabs} />
     </Stack.Navigator>
   );
 }

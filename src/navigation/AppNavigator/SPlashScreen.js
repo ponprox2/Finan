@@ -1,18 +1,22 @@
 import React, {useState, useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, StackActions} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Authnavigator from './AuthNavigator';
 import MainStack from './MainStack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Image, Text, View} from 'react-native';
 const Stack = createStackNavigator();
 
-function SPlashScreen() {
+function SPlashScreen({navigation}) {
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const retrieveData = async () => {
     try {
       const value = await AsyncStorage.getItem('Phone');
-      setPhoneNumber(value);
+      if (value) {
+        return navigation.replace('MainStack');
+      }
+      navigation.replace('Authnavigator');
     } catch (error) {}
   };
 
@@ -21,10 +25,9 @@ function SPlashScreen() {
   }, []);
 
   return (
-    <NavigationContainer>
-      {/* {phoneNumber ? <MainStack /> : <Authnavigator />} */}
-      <Authnavigator />
-    </NavigationContainer>
+    <View>
+      <Text>1232112</Text>
+    </View>
   );
 }
 

@@ -2,8 +2,10 @@ import React from 'react';
 import {MenuProvider} from 'react-native-popup-menu';
 import {createStore, useSelector} from 'react-redux';
 import SPlashScreen from './src/navigation/AppNavigator/SPlashScreen';
+import Appnavigator from './src/navigation/Appnavigator1';
 import {Provider} from 'react-redux';
 import {store} from './src/redux/store';
+import LoadMore from './src/screen/shopshoes/loadMore/index';
 
 function App() {
   // const counter = useSelector(state => state.counter);
@@ -11,7 +13,8 @@ function App() {
   return (
     <Provider store={store}>
       <MenuProvider>
-        <SPlashScreen />
+        {/* <Appnavigator /> */}
+        <LoadMore />
       </MenuProvider>
     </Provider>
   );

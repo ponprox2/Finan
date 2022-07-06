@@ -19,8 +19,10 @@ import RightArow from '../../../../assets/icon/RightArow.svg';
 import QRCode from '../../../../assets/icon/QRCode.svg';
 import Mess from '../../../../assets/icon/Mess.svg';
 import Bell from '../../../../assets/icon/Bell.svg';
+import i18n from '../../../../assets/string/i18n';
 
 function Home({navigation}) {
+  const {t} = i18n;
   const retrieveData = async () => {
     try {
       const value = await AsyncStorage.getItem('Phone');
@@ -41,9 +43,9 @@ function Home({navigation}) {
             style={styles.avatar}
           />
           <View style={styles.boxTextHeader}>
-            <Text style={styles.textName}>Bếp nhà - Thực phẩ...</Text>
+            <Text style={styles.textName}>Bếp nhà - Thực phẩm</Text>
             <TouchableOpacity style={styles.boxDetail}>
-              <Text style={styles.textDetail}>Thông tin cửa hàng</Text>
+              <Text style={styles.textDetail}>{t(`infoShop`)}</Text>
               <RightArow style={styles.rightArow} fill={'#DDE1E5'} />
             </TouchableOpacity>
           </View>
