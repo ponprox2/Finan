@@ -12,156 +12,68 @@ import {
   ImageBackground,
 } from 'react-native';
 import {COLORS, globalStyles} from '../../constants/index';
-import Circle1 from '../../assets/icon/IconCardBasic1/Circle1.svg';
-import Circle2 from '../../assets/icon/IconCardBasic1/Circle2.svg';
-import Circle3 from '../../assets/icon/IconCardBasic1/Circle3.svg';
-import Icon4 from '../../assets/icon/IconCardBasic1/icon4.svg';
+
 import Phone from '../../assets/icon/Phone.svg';
 import Web from '../../assets/icon/Web.svg';
 import Location from '../../assets/icon/Location.svg';
 import Bank from '../../assets/icon/Bank.svg';
 import Carousel, {Pagination} from 'react-native-snap-carousel-v4';
 
-const images = [{}, {}, {}];
-
-const renderItem = ({item, index}) => {
-  return (
-    <ImageBackground
-      source={require('../../assets/image/imageCardBasic1/imageBasic1.png')}
-      style={styles.cardBackground}>
-      <Circle1 style={styles.CirCle1} />
-      <Circle2 style={styles.CirCle2} />
-      <Circle3 style={styles.CirCle3} />
-      <Icon4 style={styles.Icon4} />
-      <Icon4 style={styles.Icon5} />
-      <Icon4 style={styles.Icon6} />
-      <Image
-        style={styles.logo}
-        source={require('../../assets/image/Logo.png')}
-      />
-      <ImageBackground
-        style={styles.CardView}
-        source={require('../../assets/image/imageCardBasic1/backgroundBasic1.png')}>
-        <View style={styles.boxTemp}></View>
-        <View style={styles.viewInfoShop}>
-          <Text style={styles.TextNameShop}>Julido shop</Text>
-          <Image
-            style={styles.Image}
-            source={require('../../assets/image/QRCode.png')}
-          />
-          <View style={styles.BoxText}>
-            <Phone fill="#EA9B3D" />
-            <Text style={styles.TextStyle}>090 909 900</Text>
-          </View>
-          <View style={styles.BoxText}>
-            <Web fill="#EA9B3D" />
-            <Text style={styles.TextStyle}>julido.buynow.shop</Text>
-          </View>
-          <View style={styles.BoxText}>
-            <Location fill="#EA9B3D" />
-            <Text style={styles.TextStyle}>
-              195/10E Điện Biên Phủ, Phường 22, Quận Bình Thạnh, TP. HCM
-            </Text>
-          </View>
-          <View style={styles.BoxText1}>
-            <Bank fill="#EA9B3D" />
-            <View>
-              <Text style={styles.TextStyle}>Ngân hàng MB bank:</Text>
-              <Text style={styles.TextStyle}>
-                Nguyễn Đỗ Huy Quang - 9090 92039 02932
-              </Text>
-              <Text style={styles.TextStyle}>
-                Nguyễn Đỗ Huy Quang - 9090 92039 02932
-              </Text>
-              <Text style={styles.TextStyle}>
-                Nguyễn Đỗ Huy Quang - 9090 92039 02932
-              </Text>
-            </View>
-          </View>
-        </View>
-      </ImageBackground>
-    </ImageBackground>
-  );
-};
-
-export default function BasicCard() {
+export default function BasicCard({item, index}) {
   const [activeSlide, setActiveSlide] = useState(0);
   return (
-    // <View>
-    //   <View style={{maxHeight: '75%'}}>
-    //     <Carousel
-    //       layout="default"
-    //       sliderWidth={302}
-    //       itemWidth={302}
-    //       data={images}
-    //       onSnapToItem={index => setActiveSlide(index)}
-    //       renderItem={renderItem}
-    //     />
-    //   </View>
-    //   <Pagination
-    //     dotsLength={images.length}
-    //     activeDotIndex={activeSlide}
-    //     animatedDuration={600}
-    //     dotStyle={styles.dot}
-    //     inactiveDotStyle={styles.inactiveDot}
-    //     inactiveDotOpacity={0.9}
-    //     inactiveDotScale={0.6}
-    //   />
-    // </View>
-    <ImageBackground
-      source={require('../../assets/image/imageCardBasic1/imageBasic1.png')}
-      style={styles.cardBackground}>
-      <Circle1 style={styles.CirCle1} />
-      <Circle2 style={styles.CirCle2} />
-      <Circle3 style={styles.CirCle3} />
-      <Icon4 style={styles.Icon4} />
-      <Icon4 style={styles.Icon5} />
-      <Icon4 style={styles.Icon6} />
+    <ImageBackground source={item.BGBasic} style={styles.cardBackground}>
       <Image
         style={styles.logo}
         source={require('../../assets/image/Logo.png')}
       />
-      <ImageBackground
-        style={styles.CardView}
-        source={require('../../assets/image/imageCardBasic1/backgroundBasic1.png')}>
+      <View style={[styles.CardView, {backgroundColor: item.backgroundColor}]}>
         <View style={styles.boxTemp}></View>
         <View style={styles.viewInfoShop}>
-          <Text style={styles.TextNameShop}>Julido shop</Text>
+          <Text style={[styles.TextNameShop, {color: item.color}]}>
+            Julido shop
+          </Text>
           <Image
             style={styles.Image}
             source={require('../../assets/image/QRCode.png')}
           />
           <View style={styles.BoxText}>
             <Phone fill="#EA9B3D" />
-            <Text style={styles.TextStyle}>090 909 900</Text>
+            <Text style={[styles.TextStyle, {color: item.color}]}>
+              090 909 900
+            </Text>
           </View>
           <View style={styles.BoxText}>
             <Web fill="#EA9B3D" />
-            <Text style={styles.TextStyle}>julido.buynow.shop</Text>
+            <Text style={[styles.TextStyle, {color: item.color}]}>
+              julido.buynow.shop
+            </Text>
           </View>
           <View style={styles.BoxText}>
             <Location fill="#EA9B3D" />
-            <Text style={styles.TextStyle}>
+            <Text style={[styles.TextStyle1, {color: item.color}]}>
               195/10E Điện Biên Phủ, Phường 22, Quận Bình Thạnh, TP. HCM
             </Text>
           </View>
           <View style={styles.BoxText1}>
             <Bank fill="#EA9B3D" />
             <View>
-              <Text style={styles.TextStyle}>Ngân hàng MB bank:</Text>
-              <Text style={styles.TextStyle}>
+              <Text style={[styles.TextStyle, {color: item.color}]}>
+                Ngân hàng MB bank:
+              </Text>
+              <Text style={[styles.TextStyle, {color: item.color}]}>
                 Nguyễn Đỗ Huy Quang - 9090 92039 02932
               </Text>
-              <Text style={styles.TextStyle}>
+              <Text style={[styles.TextStyle, {color: item.color}]}>
                 Nguyễn Đỗ Huy Quang - 9090 92039 02932
               </Text>
-              <Text style={styles.TextStyle}>
+              <Text style={[styles.TextStyle, {color: item.color}]}>
                 Nguyễn Đỗ Huy Quang - 9090 92039 02932
               </Text>
             </View>
           </View>
         </View>
-      </ImageBackground>
+      </View>
     </ImageBackground>
   );
 }
@@ -213,12 +125,14 @@ const styles = StyleSheet.create({
     left: 0,
   },
   CardView: {
-    minHeight: '34%',
+    minHeight: '24%',
     width: 270,
-    backgroundColor: '#996633',
     marginBottom: 20,
     borderRadius: 20,
     marginTop: '66%',
+    borderWidth: 1,
+    borderColor: 'rgba(216, 130, 7, 0.5)',
+    overflow: 'hidden',
   },
   TextNameShop: {
     color: '#FFFFFF',
@@ -241,6 +155,12 @@ const styles = StyleSheet.create({
     fontSize: 10,
     lineHeight: 12,
     fontWeight: 'SemiBold',
+  },
+  TextStyle1: {
+    marginLeft: 6,
+    fontSize: 10,
+    lineHeight: 12,
+    fontWeight: '600',
   },
   Image: {
     position: 'absolute',

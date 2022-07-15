@@ -100,30 +100,6 @@ export default function Card() {
         />
       </View>
     </ScrollView>
-    // <View style={styles.container}>
-    //   <BasicCard />
-
-    //   <View style={styles.boxSelect}>
-    //     <TouchableOpacity>
-    //       <Image
-    //         style={styles.select}
-    //         source={require('../../assets/image/Elements.png')}
-    //       />
-    //     </TouchableOpacity>
-    //     <TouchableOpacity>
-    //       <Image
-    //         style={styles.select}
-    //         source={require('../../assets/image/Animal.png')}
-    //       />
-    //     </TouchableOpacity>
-    //     <TouchableOpacity>
-    //       <Image
-    //         style={styles.select}
-    //         source={require('../../assets/image/Basic.png')}
-    //       />
-    //     </TouchableOpacity>
-    //   </View>
-    // </View>
   );
 }
 

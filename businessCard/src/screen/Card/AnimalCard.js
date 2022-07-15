@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState, forwardRef} from 'react';
 import {
   Image,
   StyleSheet,
@@ -11,9 +11,13 @@ import {
   ScrollView,
   Screen,
   Share,
+  PermissionsAndroid,
+  Platform,
 } from 'react-native';
 import ViewShot from 'react-native-view-shot';
+import CameraRoll from '@react-native-community/cameraroll';
 
+import CardStyle from '../../component/CardStyle';
 import {COLORS, globalStyles} from '../../constants/index';
 import BasicCard from '../BasicCard/index';
 import CardAnimal from '../Animal/CardAnimal';
@@ -35,62 +39,254 @@ const images = [
     imageAnimal: require('../../assets/image/Animal/TheRat.png'),
     textAnimal: require('../../assets/image/Animal/TextTheRat.png'),
     right: <RightRat />,
-    // style: styles.CardAnimal,
+    styleText: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 100,
+      position: 'absolute',
+      left: 16,
+      top: 115,
+    },
+    styleImage: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 150,
+      position: 'absolute',
+      right: -6,
+      top: -20,
+    },
   },
   {
     imageAnimal: require('../../assets/image/Animal/TheOX.png'),
     textAnimal: require('../../assets/image/Animal/TextTheOX.png'),
     right: <RightOX />,
+    heightTextAnimal: '90',
+    styleText: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 90,
+      position: 'absolute',
+      left: 16,
+      top: 125,
+    },
+    styleImage: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 150,
+      position: 'absolute',
+      right: -3,
+      top: -10,
+    },
   },
   {
     imageAnimal: require('../../assets/image/Animal/TheTiger.png'),
     textAnimal: require('../../assets/image/Animal/TextTheTiger.png'),
     right: <RightTiger />,
+    styleText: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 81,
+      position: 'absolute',
+      left: 16,
+      top: 135,
+    },
+    styleImage: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 150,
+      position: 'absolute',
+      right: -6,
+      top: -10,
+    },
   },
   {
     imageAnimal: require('../../assets/image/Animal/TheCat.png'),
     textAnimal: require('../../assets/image/Animal/TextTheCat.png'),
     right: <RightCat />,
+    styleText: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 100,
+      position: 'absolute',
+      left: 14,
+      top: 133,
+    },
+    styleImage: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 150,
+      position: 'absolute',
+      right: -6,
+      top: -13,
+    },
   },
   {
     imageAnimal: require('../../assets/image/Animal/TheDragon.png'),
     textAnimal: require('../../assets/image/Animal/TextTheDragon.png'),
     right: <RightDragon />,
+    styleText: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 87,
+      position: 'absolute',
+      left: 16,
+      top: 130,
+    },
+    styleImage: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 150,
+      position: 'absolute',
+      right: -6,
+      top: -6,
+    },
   },
   {
     imageAnimal: require('../../assets/image/Animal/TheSnake.png'),
     textAnimal: require('../../assets/image/Animal/TextTheSnake.png'),
     right: <RightSnake />,
+    styleText: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 100,
+      position: 'absolute',
+      left: 16,
+      top: 115,
+    },
+    styleImage: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 150,
+      position: 'absolute',
+      right: -6,
+      top: -6,
+    },
   },
   {
     imageAnimal: require('../../assets/image/Animal/TheHorse.png'),
     textAnimal: require('../../assets/image/Animal/TextTheHorse.png'),
     right: <RightHorse />,
+    styleText: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 100,
+      position: 'absolute',
+      left: 16,
+      top: 120,
+    },
+    styleImage: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 150,
+      position: 'absolute',
+      right: -6,
+      top: 0,
+    },
   },
   {
     imageAnimal: require('../../assets/image/Animal/TheGoat.png'),
     textAnimal: require('../../assets/image/Animal/TextTheGoat.png'),
     right: <RightGoat />,
+    styleText: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 100,
+      position: 'absolute',
+      left: 16,
+      top: 120,
+    },
+    styleImage: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 150,
+      position: 'absolute',
+      right: -6,
+      top: -3,
+    },
   },
   {
     imageAnimal: require('../../assets/image/Animal/TheMonkey.png'),
     textAnimal: require('../../assets/image/Animal/TextTheMonkey.png'),
     right: <RightMonkey />,
+    styleText: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 100,
+      position: 'absolute',
+      left: 16,
+      top: 115,
+    },
+    styleImage: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 150,
+      position: 'absolute',
+      right: -3,
+      top: 3,
+    },
   },
   {
     imageAnimal: require('../../assets/image/Animal/TheRooster.png'),
     textAnimal: require('../../assets/image/Animal/TextTheRooster.png'),
     right: <RightRooster />,
+    styleText: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 86,
+      position: 'absolute',
+      left: 16,
+      top: 130,
+    },
+    styleImage: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 150,
+      position: 'absolute',
+      right: -6,
+      top: 0,
+    },
+  },
+  {
+    imageAnimal: require('../../assets/image/Animal/TheDog.png'),
+    textAnimal: require('../../assets/image/Animal/TextTheDog.png'),
+    right: <RightGoat />,
+    styleText: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 100,
+      position: 'absolute',
+      left: 16,
+      top: 115,
+    },
+    styleImage: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 150,
+      position: 'absolute',
+      right: -6,
+      top: -10,
+    },
   },
   {
     imageAnimal: require('../../assets/image/Animal/ThePig.png'),
     textAnimal: require('../../assets/image/Animal/TextThePig.png'),
     right: <RightGoat />,
-  },
-  {
-    imageAnimal: require('../../assets/image/Animal/ThePig.png'),
-    textAnimal: require('../../assets/image/Animal/TextThePig.png'),
-    right: <RightGoat />,
+    styleText: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 110,
+      position: 'absolute',
+      left: 16,
+      top: 115,
+    },
+    styleImage: {
+      minWidth: '30%',
+      maxWidth: '40%',
+      height: 150,
+      position: 'absolute',
+      right: -6,
+      top: 0,
+    },
   },
 ];
 
@@ -141,12 +337,13 @@ const RenderImage = ({activeSlide}) => {
 const isOpacity = (a, b) => {
   if (a === 0 && b === 0) return true;
   else if (a === 0 && b === 1) return true;
+  else if (a === 1 && b === 2) return true;
+  else if (a === 14 && b === 9) return true;
   else if (a === 14 && b === 11) return true;
   else if (a === 14 && b === 10) return true;
   return false;
 };
 const isOpacity1 = (a, b) => {
-  // console.log(a, b);
   if (a === 1 && b === 0) return true;
   else if (a === 1 && b === 1) return true;
   else if (a === 15 && b === 11) return true;
@@ -154,11 +351,11 @@ const isOpacity1 = (a, b) => {
   return false;
 };
 
-export default function Card() {
+function Card({type, setType}, ref) {
   const [activeSlide, setActiveSlide] = useState(0);
   const [activeSlide1, setActiveSlide1] = useState(0);
   const [imageCap, setImageCap] = useState([]);
-  const ref = useRef();
+
   const flatlistRef = useRef();
   const SCREENS = [
     require(`../../assets/image/Basic1.png`),
@@ -166,9 +363,6 @@ export default function Card() {
     require(`../../assets/image/Basic3.png`),
   ];
 
-  useEffect(() => {
-    console.log(isOpacity(0, activeSlide));
-  }, [activeSlide]);
   const RenderImage1 = ({item, index}) => {
     return (
       <Image
@@ -205,24 +399,9 @@ export default function Card() {
   useEffect(() => {
     scrollToIndex(activeSlide);
   }, [activeSlide]);
-  // useEffect(() => {
-  //   // on mount
-  //   ref.current.capture().then(uri => {
-  //     // console.log('do something with ', uri);
-  //     Share.share({title: 'image', url: uri});
-  //     const source = {uri: uri};
-  //     setImageCap(source);
-  //     // Share.share({
-  //     //   message:
-  //     //     'React Native | A framework for building native apps using React',
-  //     // });
-  //   });
-  // }, []);
-  // async function share() {}
-  // console.log(imageCap);
+
   const handleIndex = index => {
     setActiveSlide(index);
-    setActiveSlide1(index + 1);
   };
   return (
     <ScrollView style={styles.crollView}>
@@ -242,26 +421,12 @@ export default function Card() {
             data={images}
             onSnapToItem={index => handleIndex(index)}
             renderItem={renderItem}
+            // swipeThreshold={1}
+            apparitionDelay={1000}
           />
         </ViewShot>
 
-        <View style={styles.boxSelect}>
-          <TouchableOpacity>
-            <Image source={require('../../assets/image/Elements.png')} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image
-              style={styles.select}
-              source={require('../../assets/image/Animal.png')}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image
-              style={styles.select}
-              source={require('../../assets/image/Basic.png')}
-            />
-          </TouchableOpacity>
-        </View>
+        <CardStyle type={type} setType={setType} />
       </View>
       <View style={[styles.BoxView1]}>
         <FlatList
@@ -270,11 +435,13 @@ export default function Card() {
           ref={flatlistRef}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
+          scrollEnabled={false}
         />
       </View>
     </ScrollView>
   );
 }
+export default forwardRef(Card);
 
 const styles = StyleSheet.create({
   container: {

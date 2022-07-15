@@ -11,6 +11,7 @@ import {
   BackHandler,
   ImageBackground,
 } from 'react-native';
+// import FastImage from 'react-native-fast-image';
 import {COLORS, globalStyles} from '../../constants/index';
 import Right from '../../assets/icon/iconAnimal/Right.svg';
 import Left from '../../assets/icon/iconAnimal/Left.svg';
@@ -25,9 +26,13 @@ export default function CardAnimal({item, index}) {
     <ImageBackground
       source={require('../../assets/image/Animal/BGAnimal.png')}
       style={styles.cardBackground}>
-      <Image source={item.imageAnimal} resizeMode={'center'} style={styles.CardAnimal} />
-      <Image source={item.textAnimal} style={styles.TextAnimal} />
-      {/* <Right /> */}
+      <Image
+        source={item.imageAnimal}
+        resizeMode={'center'}
+        style={item.styleImage}
+      />
+      <Image source={item.textAnimal} style={item.styleText} />
+
       <View style={styles.Right}>{item.right}</View>
 
       <View style={styles.CardView}>
@@ -122,13 +127,7 @@ const styles = StyleSheet.create({
   BoxText1: {
     flexDirection: 'row',
   },
-  logo: {
-    position: 'absolute',
-    top: 24,
-    right: 15,
-    width: 163,
-    height: 142,
-  },
+
   images: {
     borderRadius: 15,
     backgroundColor: COLORS.primaryGrey,
@@ -143,14 +142,7 @@ const styles = StyleSheet.create({
     right: -6,
     top: 0,
   },
-  TextAnimal: {
-    minWidth: '30%',
-    maxWidth: '40%',
-    height: 100,
-    position: 'absolute',
-    left: 16,
-    top: 115,
-  },
+
   Right: {
     position: 'absolute',
     top: 200,

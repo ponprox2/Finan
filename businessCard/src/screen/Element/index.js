@@ -20,26 +20,32 @@ import Web from '../../assets/icon/Web.svg';
 import Location from '../../assets/icon/Location.svg';
 import Bank from '../../assets/icon/Bank.svg';
 
-export default function CardAnimal() {
+export default function ElementCard({item, index}) {
   return (
-    <ImageBackground
-      source={require('../../assets/image/Element/BGWood.png')}
-      style={styles.cardBackground}>
-      {/* <Image
-        source={require('../../assets/image/Element/BGWood.png')}
-        resizeMode={'center'}
-        style={styles.CardAnimal}
-      /> */}
+    <ImageBackground source={item.BGElement} style={styles.cardBackground}>
+      <View style={[styles.CardAnimal, {borderColor: item.borderColor}]}>
+        <Image
+          source={require('../../assets/image/Logo.png')}
+          // resizeMode={'center'}
+          style={styles.CardAnimal1}
+        />
+      </View>
+
       <Image
-        source={require('../../assets/image/Element/Wood.png')}
-        style={styles.TextAnimal}
+        source={item.IconElement}
+        style={item.style}
+        resizeMode={'center'}
       />
       {/* <Right /> */}
       {/* <View style={styles.Right}>{item.right}</View> */}
 
       <View style={styles.CardView}>
         <View style={styles.boxTemp}></View>
-        <View style={styles.viewInfoShop}>
+        <View
+          style={[
+            styles.viewInfoShop,
+            {backgroundColor: item.backgroundColor},
+          ]}>
           <Text style={styles.TextNameShop}>Julido shop</Text>
           <Image
             style={styles.Image}
@@ -97,7 +103,7 @@ const styles = StyleSheet.create({
 
     marginBottom: 20,
     borderRadius: 20,
-    marginTop: '70%',
+    marginTop: '10%',
   },
   TextNameShop: {
     color: '#FEFEFE',
@@ -111,7 +117,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 16,
     borderRadius: 20,
-    backgroundColor: 'rgba(25, 25, 25, 0.32)',
+    // backgroundColor: 'rgba(25, 25, 25, 0.32)',
     // marginTop: 16,
   },
   BoxText: {
@@ -147,12 +153,23 @@ const styles = StyleSheet.create({
     height: 370,
   },
   CardAnimal: {
-    minWidth: '30%',
-    maxWidth: '40%',
-    height: 150,
-    position: 'absolute',
-    right: -6,
-    top: 0,
+    height: 152,
+    width: 152,
+
+    borderRadius: 150,
+    borderWidth: 10,
+    borderColor: '#267231',
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    marginTop: 16,
+  },
+  CardAnimal1: {
+    height: 139,
+    width: 139,
+
+    borderRadius: 150,
+    zIndex: 21,
   },
   TextAnimal: {
     minWidth: '30%',
@@ -160,7 +177,7 @@ const styles = StyleSheet.create({
     height: 74,
     position: 'absolute',
     left: 16,
-    top: 175,
+    top: 165,
     zIndex: 20,
   },
   Right: {
