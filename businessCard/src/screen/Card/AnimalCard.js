@@ -344,6 +344,8 @@ function Card({type, setType}, ref) {
 
   const handleOnSnap = index => {
     console.log(index);
+    carouselRef.current.snapToItem(index - 2);
+    setActiveSlide(index - 2);
   };
   const RenderImage1 = ({item, index}) => {
     return (
@@ -404,7 +406,7 @@ function Card({type, setType}, ref) {
             sliderWidth={400}
             itemWidth={400}
             data={images}
-            onSnapToItem={handleIndex}
+            // onSnapToItem={handleIndex}
             renderItem={renderItem}
             ref={carouselRef}
           />

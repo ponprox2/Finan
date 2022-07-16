@@ -128,38 +128,44 @@ function BasicCards({type, setType}, ref) {
   const [activeSlide, setActiveSlide] = useState(0);
   const [activeSlide1, setActiveSlide1] = useState(0);
   const [imageCap, setImageCap] = useState([]);
-
+  const carouselRef = useRef();
   const flatlistRef = useRef();
 
-  
+  const handleOnSnap = index => {
+    console.log(index);
+    carouselRef.current.snapToItem(index - 2);
+    setActiveSlide(index - 2);
+  };
   const RenderImage1 = ({item, index}) => {
     return (
-      <Image
-        style={[
-          styles.ImagePagination,
-          index === activeSlide + 2 && {
-            borderWidth: 2,
-            borderColor: 'green',
-            width: 50,
-            height: 50,
-          },
-          index === activeSlide + 3 && {
-            width: 50,
-            height: 50,
-          },
-          index === activeSlide + 1 && {
-            width: 50,
-            height: 50,
-          },
-          isOpacity(index, activeSlide) && {
-            opacity: 0,
-          },
-          isOpacity1(index, activeSlide) && {
-            opacity: 0,
-          },
-        ]}
-        source={item.imageAnimal}
-      />
+      <TouchableOpacity onPress={() => handleOnSnap(index)}>
+        <Image
+          style={[
+            styles.ImagePagination,
+            index === activeSlide + 2 && {
+              borderWidth: 2,
+              borderColor: 'green',
+              width: 50,
+              height: 50,
+            },
+            index === activeSlide + 3 && {
+              width: 50,
+              height: 50,
+            },
+            index === activeSlide + 1 && {
+              width: 50,
+              height: 50,
+            },
+            isOpacity(index, activeSlide) && {
+              opacity: 0,
+            },
+            isOpacity1(index, activeSlide) && {
+              opacity: 0,
+            },
+          ]}
+          source={item.imageAnimal}
+        />
+      </TouchableOpacity>
     );
   };
   const scrollToIndex = index => {
@@ -191,6 +197,7 @@ function BasicCards({type, setType}, ref) {
             data={images}
             onSnapToItem={index => handleIndex(index)}
             renderItem={renderItem}
+            ref={carouselRef}
           />
         </ViewShot>
 

@@ -157,43 +157,46 @@ function ElementCard({type, setType}, ref) {
   const [activeSlide1, setActiveSlide1] = useState(0);
   const [imageCap, setImageCap] = useState([]);
 
+  const carouselRef = useRef();
   const flatlistRef = useRef();
-  const SCREENS = [
-    require(`../../assets/image/Basic1.png`),
-    require(`../../assets/image/Basic2.png`),
-    require(`../../assets/image/Basic3.png`),
-  ];
 
+  const handleOnSnap = index => {
+    console.log(index);
+    carouselRef.current.snapToItem(index - 2);
+    setActiveSlide(index - 2);
+  };
 
   const RenderImage1 = ({item, index}) => {
     return (
-      <Image
-        style={[
-          styles.ImagePagination,
-          index === activeSlide + 2 && {
-            borderWidth: 2,
-            borderColor: 'green',
-            width: 50,
-            height: 50,
-            // padding: 10,
-          },
-          index === activeSlide + 3 && {
-            width: 50,
-            height: 50,
-          },
-          index === activeSlide + 1 && {
-            width: 50,
-            height: 50,
-          },
-          isOpacity(index, activeSlide) && {
-            opacity: 0,
-          },
-          isOpacity1(index, activeSlide) && {
-            opacity: 0,
-          },
-        ]}
-        source={item.imageAnimal}
-      />
+      <TouchableOpacity onPress={() => handleOnSnap(index)}>
+        <Image
+          style={[
+            styles.ImagePagination,
+            index === activeSlide + 2 && {
+              borderWidth: 2,
+              borderColor: 'green',
+              width: 50,
+              height: 50,
+              // padding: 10,
+            },
+            index === activeSlide + 3 && {
+              width: 50,
+              height: 50,
+            },
+            index === activeSlide + 1 && {
+              width: 50,
+              height: 50,
+            },
+            isOpacity(index, activeSlide) && {
+              opacity: 0,
+            },
+            isOpacity1(index, activeSlide) && {
+              opacity: 0,
+            },
+          ]}
+          source={item.imageAnimal}
+        />
+      </TouchableOpacity>
     );
   };
   const scrollToIndex = index => {
@@ -225,6 +228,7 @@ function ElementCard({type, setType}, ref) {
             data={images}
             onSnapToItem={index => handleIndex(index)}
             renderItem={renderItem}
+            ref={carouselRef}
           />
         </ViewShot>
 
