@@ -19,7 +19,7 @@ import Location from '../../assets/icon/Location.svg';
 import Bank from '../../assets/icon/Bank.svg';
 import Carousel, {Pagination} from 'react-native-snap-carousel-v4';
 
-export default function BasicCard({item, index}) {
+function BasicCard({item, index}) {
   const [activeSlide, setActiveSlide] = useState(0);
   return (
     <ImageBackground source={item.BGBasic} style={styles.cardBackground}>
@@ -77,6 +77,8 @@ export default function BasicCard({item, index}) {
     </ImageBackground>
   );
 }
+
+export default React.memo(BasicCard);
 
 const styles = StyleSheet.create({
   container: {

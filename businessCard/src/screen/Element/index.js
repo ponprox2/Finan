@@ -20,7 +20,7 @@ import Web from '../../assets/icon/Web.svg';
 import Location from '../../assets/icon/Location.svg';
 import Bank from '../../assets/icon/Bank.svg';
 
-export default function ElementCard({item, index}) {
+function ElementCard({item, index}) {
   return (
     <ImageBackground source={item.BGElement} style={styles.cardBackground}>
       <View style={[styles.CardAnimal, {borderColor: item.borderColor}]}>
@@ -86,6 +86,8 @@ export default function ElementCard({item, index}) {
     </ImageBackground>
   );
 }
+
+export default React.memo(ElementCard);
 
 const styles = StyleSheet.create({
   cardBackground: {

@@ -316,23 +316,6 @@ const renderItem = ({item, index}) => {
     </View>
   );
 };
-const RenderImage = ({activeSlide}) => {
-  const data = [
-    require(`../../assets/image/Basic.png`),
-    require(`../../assets/image/Basic.png`),
-    require(`../../assets/image/Basic.png`),
-  ];
-
-  return (
-    <View>
-      {data.map((screen, i) => (
-        <View style={{flex: 1, alignItems: 'center'}} key={i}>
-          <Text style={{color: activeSlide === i ? 'blue' : '#000'}}>{i}</Text>
-        </View>
-      ))}
-    </View>
-  );
-};
 
 const isOpacity = (a, b) => {
   if (a === 0 && b === 0) return true;
@@ -353,44 +336,45 @@ const isOpacity1 = (a, b) => {
 
 function Card({type, setType}, ref) {
   const [activeSlide, setActiveSlide] = useState(0);
-  const [activeSlide1, setActiveSlide1] = useState(0);
+  const [indexActive, setIndexActive] = useState(2);
   const [imageCap, setImageCap] = useState([]);
 
   const flatlistRef = useRef();
-  const SCREENS = [
-    require(`../../assets/image/Basic1.png`),
-    require(`../../assets/image/Basic2.png`),
-    require(`../../assets/image/Basic3.png`),
-  ];
+  const carouselRef = useRef();
 
+  const handleOnSnap = index => {
+    console.log(index);
+  };
   const RenderImage1 = ({item, index}) => {
     return (
-      <Image
-        style={[
-          styles.ImagePagination,
-          index === activeSlide + 2 && {
-            borderWidth: 2,
-            borderColor: 'green',
-            width: 50,
-            height: 50,
-          },
-          index === activeSlide + 3 && {
-            width: 50,
-            height: 50,
-          },
-          index === activeSlide + 1 && {
-            width: 50,
-            height: 50,
-          },
-          isOpacity(index, activeSlide) && {
-            opacity: 0,
-          },
-          isOpacity1(index, activeSlide) && {
-            opacity: 0,
-          },
-        ]}
-        source={item.imageAnimal}
-      />
+      <TouchableOpacity onPress={() => handleOnSnap(index)}>
+        <Image
+          style={[
+            styles.ImagePagination,
+            index === activeSlide + 2 && {
+              borderWidth: 2,
+              borderColor: 'green',
+              width: 50,
+              height: 50,
+            },
+            index === activeSlide + 3 && {
+              width: 50,
+              height: 50,
+            },
+            index === activeSlide + 1 && {
+              width: 50,
+              height: 50,
+            },
+            isOpacity(index, activeSlide) && {
+              opacity: 0,
+            },
+            isOpacity1(index, activeSlide) && {
+              opacity: 0,
+            },
+          ]}
+          source={item.imageAnimal}
+        />
+      </TouchableOpacity>
     );
   };
   const scrollToIndex = index => {
@@ -402,6 +386,7 @@ function Card({type, setType}, ref) {
 
   const handleIndex = index => {
     setActiveSlide(index);
+    // console.log(index);
   };
   return (
     <ScrollView style={styles.crollView}>
@@ -419,10 +404,9 @@ function Card({type, setType}, ref) {
             sliderWidth={400}
             itemWidth={400}
             data={images}
-            onSnapToItem={index => handleIndex(index)}
+            onSnapToItem={handleIndex}
             renderItem={renderItem}
-            // swipeThreshold={1}
-            apparitionDelay={1000}
+            ref={carouselRef}
           />
         </ViewShot>
 
