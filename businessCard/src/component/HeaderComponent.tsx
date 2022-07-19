@@ -11,6 +11,7 @@ import {
   BackHandler,
 } from 'react-native';
 import ChevronLeft from '../assets/icon/ChevronLeft.svg';
+import {responsiveWidth} from '../styles/index';
 export default function HeaderComponent() {
   return (
     <View style={styles.header}>
@@ -27,10 +28,10 @@ const styles = StyleSheet.create({
   header: {
     width: '100%',
     flexDirection: 'row',
-    height: 56,
+    height: responsiveWidth(56),
     backgroundColor: '#FEFEFE',
-    paddingTop: 20,
-    paddingLeft: 24,
+    paddingTop: responsiveWidth(20),
+    paddingLeft: responsiveWidth(24),
   },
   textCreateProduct: {
     textAlign: 'center',

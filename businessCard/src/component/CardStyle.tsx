@@ -1,6 +1,6 @@
 import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import React from 'react';
-
+import {responsiveWidth} from '../styles/index';
 export default function CardStyle({type, setType}) {
   const handleChangeElement = () => {
     setType('element');
@@ -46,12 +46,12 @@ export default function CardStyle({type, setType}) {
 
 const styles = StyleSheet.create({
   boxSelect: {
-    marginTop: 23,
-    marginBottom: 8,
+    marginTop: responsiveWidth(23),
+    marginBottom: responsiveWidth(8),
     width: '100%',
   },
   select: {
-    marginLeft: 16,
+    marginLeft: responsiveWidth(16),
   },
   element: {
     marginLeft: '30%',

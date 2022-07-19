@@ -18,7 +18,7 @@ import Web from '../../assets/icon/Web.svg';
 import Location from '../../assets/icon/Location.svg';
 import Bank from '../../assets/icon/Bank.svg';
 import Carousel, {Pagination} from 'react-native-snap-carousel-v4';
-
+import {responsiveWidth} from '../../styles/index';
 function BasicCard({item, index}) {
   const [activeSlide, setActiveSlide] = useState(0);
   return (
@@ -82,55 +82,26 @@ export default React.memo(BasicCard);
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 8,
+    marginTop: responsiveWidth(8),
     alignItems: 'center',
     width: '100%',
     backgroundColor: '#FFFFFF',
   },
   cardBackground: {
-    width: 302,
+    width: responsiveWidth(302),
     minHeight: '56%',
-    marginTop: 12,
-    borderRadius: 30,
+    marginTop: responsiveWidth(12),
+    borderRadius: responsiveWidth(30),
     overflow: 'hidden',
     alignItems: 'center',
     // justifyContent: 'flex-end',
   },
-  CirCle1: {
-    position: 'absolute',
-    right: 13,
-    top: 24,
-  },
-  CirCle2: {
-    position: 'absolute',
-    left: 34,
-    top: 157,
-  },
-  CirCle3: {
-    position: 'absolute',
-    right: 25,
-    bottom: 8,
-  },
-  Icon4: {
-    position: 'absolute',
-    top: 97,
-    left: 0,
-  },
-  Icon5: {
-    position: 'absolute',
-    top: 104,
-    left: 0,
-  },
-  Icon6: {
-    position: 'absolute',
-    top: 111,
-    left: 0,
-  },
+
   CardView: {
     minHeight: '24%',
-    width: 270,
-    marginBottom: 20,
-    borderRadius: 20,
+    width: responsiveWidth(270),
+    marginBottom: responsiveWidth(20),
+    borderRadius: responsiveWidth(20),
     marginTop: '66%',
     borderWidth: 1,
     borderColor: 'rgba(216, 130, 7, 0.5)',
@@ -141,48 +112,48 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 17,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: responsiveWidth(20),
   },
   viewInfoShop: {
-    paddingHorizontal: 16,
-    paddingVertical: 16,
+    paddingHorizontal: responsiveWidth(16),
+    paddingVertical: responsiveWidth(16),
   },
   BoxText: {
     flexDirection: 'row',
-    marginBottom: 16,
+    marginBottom: responsiveWidth(16),
   },
   TextStyle: {
     color: '#FFFFFF',
-    marginLeft: 6,
+    marginLeft: responsiveWidth(6),
     fontSize: 10,
     lineHeight: 12,
     fontWeight: 'SemiBold',
   },
   TextStyle1: {
-    marginLeft: 6,
-    fontSize: 10,
+    marginLeft: responsiveWidth(6),
+    fontSize: responsiveWidth(10),
     lineHeight: 12,
     fontWeight: '600',
   },
   Image: {
     position: 'absolute',
-    top: 16,
-    right: 16,
+    top: responsiveWidth(16),
+    right: responsiveWidth(16),
   },
   BoxText1: {
     flexDirection: 'row',
   },
   logo: {
     position: 'absolute',
-    top: 24,
-    right: 15,
-    width: 163,
-    height: 142,
+    top: responsiveWidth(24),
+    right: responsiveWidth(15),
+    width: responsiveWidth(163),
+    height: responsiveWidth(142),
   },
   images: {
-    borderRadius: 15,
+    borderRadius: responsiveWidth(15),
     backgroundColor: COLORS.primaryGrey,
-    width: 370,
-    height: 370,
+    width: responsiveWidth(370),
+    height: responsiveWidth(370),
   },
 });

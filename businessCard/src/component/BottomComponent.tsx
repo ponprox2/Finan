@@ -14,7 +14,7 @@ import {COLORS, globalStyles} from '../constants/index';
 import CameraRoll from '@react-native-community/cameraroll';
 import DownLoad from '../assets/icon/DownLoad.svg';
 import ShareAndroid from '../assets/icon/ShareAndroid.svg';
-
+import {responsiveWidth} from '../styles/index';
 function BottomComponent(props, ref) {
   async function hasAndroidPermission() {
     const permission = PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE;
@@ -74,19 +74,19 @@ export default forwardRef(BottomComponent);
 const styles = StyleSheet.create({
   bottom: {
     backgroundColor: COLORS.whiteLight,
-    height: 72,
+    height: responsiveWidth(72),
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: responsiveWidth(10),
     position: 'absolute',
-    bottom: 0,
+    bottom: responsiveWidth(0),
     width: '100%',
   },
   buttonAdd: {
-    width: 167,
-    height: 48,
-    borderRadius: 6,
+    width: responsiveWidth(167),
+    height: responsiveWidth(48),
+    borderRadius: responsiveWidth(6),
     borderWidth: 1,
     borderColor: COLORS.greenLighter,
     alignItems: 'center',
@@ -98,14 +98,14 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     lineHeight: 22,
     color: COLORS.greenLighter,
-    marginRight: 16,
-    marginLeft: 4,
+    marginRight: responsiveWidth(16),
+    marginLeft: responsiveWidth(4),
   },
   buttonCreate: {
     flexDirection: 'row',
-    width: 167,
-    height: 48,
-    borderRadius: 6,
+    width: responsiveWidth(167),
+    height: responsiveWidth(48),
+    borderRadius: responsiveWidth(6),
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: COLORS.greenLighter,
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     lineHeight: 22,
     color: COLORS.whiteLight,
-    marginRight: 16,
-    marginLeft: 4,
+    marginRight: responsiveWidth(16),
+    marginLeft: responsiveWidth(4),
   },
 });

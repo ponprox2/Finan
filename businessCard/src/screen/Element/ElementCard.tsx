@@ -16,7 +16,7 @@ import {COLORS, globalStyles} from '../../constants/index';
 
 import CardElement from './index';
 import Carousel, {Pagination} from 'react-native-snap-carousel-v4';
-
+import {responsiveWidth, responsiveHeight} from '../../styles/index';
 const images = [
   {
     BGElement: require('../../assets/image/Element/BGMetal.png'),
@@ -26,10 +26,10 @@ const images = [
     style: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 74,
+      height: responsiveWidth(74),
       position: 'absolute',
-      left: 30,
-      top: 165,
+      left: responsiveWidth(30),
+      top: responsiveWidth(160),
       zIndex: 20,
     },
   },
@@ -41,10 +41,10 @@ const images = [
     style: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 74,
+      height: responsiveWidth(74),
       position: 'absolute',
-      left: 16,
-      top: 165,
+      left: responsiveWidth(16),
+      top: responsiveWidth(160),
       zIndex: 20,
     },
   },
@@ -56,10 +56,10 @@ const images = [
     style: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 85,
+      height: responsiveWidth(85),
       position: 'absolute',
-      left: 24,
-      top: 155,
+      left: responsiveWidth(24),
+      top: responsiveWidth(155),
       zIndex: 20,
     },
   },
@@ -71,10 +71,10 @@ const images = [
     style: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 148,
+      height: responsiveWidth(148),
       position: 'absolute',
-      left: 16,
-      top: 95,
+      left: responsiveWidth(16),
+      top: responsiveWidth(95),
       zIndex: 20,
     },
   },
@@ -86,10 +86,10 @@ const images = [
     style: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 74,
+      height: responsiveWidth(74),
       position: 'absolute',
-      left: 24,
-      top: 165,
+      left: responsiveWidth(24),
+      top: responsiveWidth(165),
       zIndex: 20,
     },
   },
@@ -206,8 +206,8 @@ function ElementCard({type, setType}, ref) {
           }}>
           <Carousel
             layout="default"
-            sliderWidth={400}
-            itemWidth={400}
+            sliderWidth={responsiveWidth(370)}
+            itemWidth={responsiveWidth(370)}
             data={images}
             onSnapToItem={handleIndex}
             renderItem={renderItem}
@@ -234,7 +234,7 @@ export default forwardRef(ElementCard);
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 8,
+    marginTop: responsiveWidth(8),
     alignItems: 'center',
     width: '100%',
     backgroundColor: '#FFFFFF',
@@ -244,48 +244,48 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   boxSelect: {
-    marginTop: 23,
+    marginTop: responsiveWidth(23),
 
-    marginBottom: 8,
+    marginBottom: responsiveWidth(8),
 
     marginLeft: '30%',
     flexDirection: 'row',
     width: '100%',
   },
   select: {
-    marginLeft: 16,
+    marginLeft: responsiveWidth(16),
   },
 
   crollView: {
-    marginBottom: 70,
+    marginBottom: responsiveWidth(70),
   },
   active: {
     borderWidth: 2,
     borderColor: 'green',
   },
   boxView: {
-    marginLeft: 6,
+    marginLeft: responsiveWidth(6),
   },
 
   imagePagination: {
-    margin: 8,
-    width: 40,
-    height: 40,
+    margin: responsiveWidth(6),
+    width: responsiveWidth(40),
+    height: responsiveWidth(40),
   },
   boxView1: {
     flexDirection: 'row',
-    marginLeft: 50,
-    marginRight: 40,
+    marginLeft: responsiveWidth(50),
+    marginRight: responsiveWidth(40),
   },
   select: {
     borderWidth: 2,
     borderColor: 'green',
-    width: 50,
-    height: 50,
+    width: responsiveWidth(50),
+    height: responsiveWidth(50),
   },
   nextSelect: {
-    width: 50,
-    height: 50,
+    width: responsiveWidth(50),
+    height: responsiveWidth(50),
   },
   opacity0: {
     opacity: 0,

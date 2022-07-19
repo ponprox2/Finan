@@ -11,6 +11,7 @@ import {
   BackHandler,
   ImageBackground,
 } from 'react-native';
+// import FastImage from 'react-native-fast-image';
 import {COLORS, globalStyles} from '../../constants/index';
 import Right from '../../assets/icon/iconAnimal/Right.svg';
 import Left from '../../assets/icon/iconAnimal/Left.svg';
@@ -19,33 +20,24 @@ import Phone from '../../assets/icon/Phone.svg';
 import Web from '../../assets/icon/Web.svg';
 import Location from '../../assets/icon/Location.svg';
 import Bank from '../../assets/icon/Bank.svg';
-
-function ElementCard({item, index}) {
+import {responsiveWidth} from '../../styles/index';
+export default function CardAnimal({item, index}) {
   return (
-    <ImageBackground source={item.BGElement} style={styles.cardBackground}>
-      <View style={[styles.CardAnimal, {borderColor: item.borderColor}]}>
-        <Image
-          source={require('../../assets/image/Logo.png')}
-          // resizeMode={'center'}
-          style={styles.CardAnimal1}
-        />
-      </View>
-
+    <ImageBackground
+      source={require('../../assets/image/Animal/BGAnimal.png')}
+      style={styles.cardBackground}>
       <Image
-        source={item.IconElement}
-        style={item.style}
+        source={item.imageAnimal}
         resizeMode={'center'}
+        style={item.styleImage}
       />
-      {/* <Right /> */}
-      {/* <View style={styles.Right}>{item.right}</View> */}
+      <Image source={item.textAnimal} style={item.styleText} />
+
+      <View style={styles.Right}>{item.right}</View>
 
       <View style={styles.CardView}>
         <View style={styles.boxTemp}></View>
-        <View
-          style={[
-            styles.viewInfoShop,
-            {backgroundColor: item.backgroundColor},
-          ]}>
+        <View style={styles.viewInfoShop}>
           <Text style={styles.TextNameShop}>Julido shop</Text>
           <Image
             style={styles.Image}
@@ -80,116 +72,85 @@ function ElementCard({item, index}) {
               </Text>
             </View>
           </View>
-          {/* <Left style={styles.LeftStyle} /> */}
+          <Left style={styles.LeftStyle} />
         </View>
       </View>
     </ImageBackground>
   );
 }
 
-export default React.memo(ElementCard);
-
 const styles = StyleSheet.create({
   cardBackground: {
-    width: 302,
+    width: responsiveWidth(302),
     minHeight: '56%',
-    marginTop: 12,
-    borderRadius: 30,
+    marginTop: responsiveWidth(12),
+    borderRadius: responsiveWidth(30),
     overflow: 'hidden',
     alignItems: 'center',
   },
 
   CardView: {
     minHeight: '34%',
-    width: 270,
+    width: responsiveWidth(270),
 
-    marginBottom: 20,
-    borderRadius: 20,
-    marginTop: '10%',
+    marginBottom: responsiveWidth(20),
+    borderRadius: responsiveWidth(20),
+    marginTop: '70%',
   },
   TextNameShop: {
-    color: '#FEFEFE',
+    color: '#D2A976',
     fontSize: 14,
     lineHeight: 17,
     fontWeight: 'bold',
-    marginBottom: 20,
-    marginTop: 12,
+    marginBottom: responsiveWidth(20),
   },
   viewInfoShop: {
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    borderRadius: 20,
-    // backgroundColor: 'rgba(25, 25, 25, 0.32)',
-    // marginTop: 16,
+    paddingHorizontal: responsiveWidth(16),
+    paddingVertical: responsiveWidth(16),
   },
   BoxText: {
     flexDirection: 'row',
-    marginBottom: 16,
+    marginBottom: responsiveWidth(16),
   },
   TextStyle: {
     color: '#FFFFFF',
-    marginLeft: 6,
+    marginLeft: responsiveWidth(6),
     fontSize: 10,
     lineHeight: 12,
     fontWeight: 'SemiBold',
   },
   Image: {
     position: 'absolute',
-    top: 16,
-    right: 24,
+    top: responsiveWidth(16),
+    right: responsiveWidth(24),
   },
   BoxText1: {
     flexDirection: 'row',
   },
-  logo: {
-    position: 'absolute',
-    top: 24,
-    right: 15,
-    width: 163,
-    height: 142,
-  },
+
   images: {
-    borderRadius: 15,
+    borderRadius: responsiveWidth(15),
     backgroundColor: COLORS.primaryGrey,
-    width: 370,
-    height: 370,
+    width: responsiveWidth(370),
+    height: responsiveWidth(370),
   },
   CardAnimal: {
-    height: 152,
-    width: 152,
-
-    borderRadius: 150,
-    borderWidth: 10,
-    borderColor: '#267231',
-    alignItems: 'center',
-    justifyContent: 'center',
-
-    marginTop: 16,
-  },
-  CardAnimal1: {
-    height: 139,
-    width: 139,
-
-    borderRadius: 150,
-    zIndex: 21,
-  },
-  TextAnimal: {
     minWidth: '30%',
     maxWidth: '40%',
-    height: 74,
+    height: responsiveWidth(150),
     position: 'absolute',
-    left: 16,
-    top: 165,
-    zIndex: 20,
+    right: responsiveWidth(-6),
+    top: responsiveWidth(0),
   },
+
   Right: {
     position: 'absolute',
-    top: 200,
-    right: 16,
+    top: responsiveWidth(200),
+    right: responsiveWidth(16),
   },
   LeftStyle: {
     position: 'absolute',
-    left: -10,
-    bottom: 0,
+    left: responsiveWidth(-10),
+    bottom: responsiveWidth(0),
   },
 });

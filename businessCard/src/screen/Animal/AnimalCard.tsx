@@ -16,10 +16,8 @@ import {
 } from 'react-native';
 import ViewShot from 'react-native-view-shot';
 import CameraRoll from '@react-native-community/cameraroll';
-
 import CardStyle from '../../component/CardStyle';
 import {COLORS, globalStyles} from '../../constants/index';
-
 import CardAnimal from './CardAnimal';
 import Carousel, {Pagination} from 'react-native-snap-carousel-v4';
 import RightRat from '../../assets/icon/iconAnimal/RightRat.svg';
@@ -33,7 +31,7 @@ import RightMonkey from '../../assets/icon/iconAnimal/RightMonkey.svg';
 import RightRooster from '../../assets/icon/iconAnimal/RightRooster.svg';
 import RightPig from '../../assets/icon/iconAnimal/RightPig.svg';
 import RightGoat from '../../assets/icon/iconAnimal/RightGoat.svg';
-
+import {responsiveWidth} from '../../styles/index';
 const images = [
   {
     imageAnimal: require('../../assets/image/Animal/TheRat.png'),
@@ -42,18 +40,18 @@ const images = [
     styleText: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 100,
+      height: responsiveWidth(100),
       position: 'absolute',
-      left: 16,
-      top: 115,
+      left: responsiveWidth(16),
+      top: responsiveWidth(115),
     },
     styleImage: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 150,
+      height: responsiveWidth(150),
       position: 'absolute',
-      right: -6,
-      top: -20,
+      right: responsiveWidth(-6),
+      top: responsiveWidth(-20),
     },
   },
   {
@@ -64,18 +62,18 @@ const images = [
     styleText: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 90,
+      height: responsiveWidth(90),
       position: 'absolute',
-      left: 16,
-      top: 125,
+      left: responsiveWidth(16),
+      top: responsiveWidth(125),
     },
     styleImage: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 150,
+      height: responsiveWidth(150),
       position: 'absolute',
-      right: -3,
-      top: -10,
+      right: responsiveWidth(-3),
+      top: responsiveWidth(-10),
     },
   },
   {
@@ -85,18 +83,18 @@ const images = [
     styleText: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 81,
+      height: responsiveWidth(81),
       position: 'absolute',
-      left: 16,
-      top: 135,
+      left: responsiveWidth(16),
+      top: responsiveWidth(135),
     },
     styleImage: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 150,
+      height: responsiveWidth(150),
       position: 'absolute',
-      right: -6,
-      top: -10,
+      right: responsiveWidth(-6),
+      top: responsiveWidth(-10),
     },
   },
   {
@@ -106,18 +104,18 @@ const images = [
     styleText: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 100,
+      height: responsiveWidth(100),
       position: 'absolute',
-      left: 14,
-      top: 133,
+      left: responsiveWidth(14),
+      top: responsiveWidth(133),
     },
     styleImage: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 150,
+      height: responsiveWidth(150),
       position: 'absolute',
-      right: -6,
-      top: -13,
+      right: responsiveWidth(-6),
+      top: responsiveWidth(-13),
     },
   },
   {
@@ -127,18 +125,18 @@ const images = [
     styleText: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 87,
+      height: responsiveWidth(87),
       position: 'absolute',
-      left: 16,
-      top: 130,
+      left: responsiveWidth(16),
+      top: responsiveWidth(130),
     },
     styleImage: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 150,
+      height: responsiveWidth(150),
       position: 'absolute',
-      right: -6,
-      top: -6,
+      right: responsiveWidth(-6),
+      top: responsiveWidth(-6),
     },
   },
   {
@@ -148,18 +146,18 @@ const images = [
     styleText: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 100,
+      height: responsiveWidth(100),
       position: 'absolute',
-      left: 16,
-      top: 115,
+      left: responsiveWidth(16),
+      top: responsiveWidth(115),
     },
     styleImage: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 150,
+      height: responsiveWidth(150),
       position: 'absolute',
-      right: -6,
-      top: -6,
+      right: responsiveWidth(-6),
+      top: responsiveWidth(-6),
     },
   },
   {
@@ -169,18 +167,18 @@ const images = [
     styleText: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 100,
+      height: responsiveWidth(100),
       position: 'absolute',
-      left: 16,
-      top: 120,
+      left: responsiveWidth(16),
+      top: responsiveWidth(120),
     },
     styleImage: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 150,
+      height: responsiveWidth(150),
       position: 'absolute',
-      right: -6,
-      top: 0,
+      right: responsiveWidth(-6),
+      top: responsiveWidth(0),
     },
   },
   {
@@ -190,18 +188,18 @@ const images = [
     styleText: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 100,
+      height: responsiveWidth(100),
       position: 'absolute',
-      left: 16,
-      top: 120,
+      left: responsiveWidth(16),
+      top: responsiveWidth(120),
     },
     styleImage: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 150,
+      height: responsiveWidth(150),
       position: 'absolute',
-      right: -6,
-      top: -3,
+      right: responsiveWidth(-6),
+      top: responsiveWidth(-3),
     },
   },
   {
@@ -211,18 +209,18 @@ const images = [
     styleText: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 100,
+      height: responsiveWidth(100),
       position: 'absolute',
-      left: 16,
-      top: 115,
+      left: responsiveWidth(16),
+      top: responsiveWidth(115),
     },
     styleImage: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 150,
+      height: responsiveWidth(150),
       position: 'absolute',
-      right: -3,
-      top: 3,
+      right: responsiveWidth(-3),
+      top: responsiveWidth(3),
     },
   },
   {
@@ -232,18 +230,18 @@ const images = [
     styleText: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 86,
+      height: responsiveWidth(86),
       position: 'absolute',
-      left: 16,
-      top: 130,
+      left: responsiveWidth(16),
+      top: responsiveWidth(130),
     },
     styleImage: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 150,
+      height: responsiveWidth(150),
       position: 'absolute',
-      right: -6,
-      top: 0,
+      right: responsiveWidth(-6),
+      top: responsiveWidth(0),
     },
   },
   {
@@ -253,18 +251,18 @@ const images = [
     styleText: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 100,
+      height: responsiveWidth(100),
       position: 'absolute',
-      left: 16,
-      top: 115,
+      left: responsiveWidth(16),
+      top: responsiveWidth(115),
     },
     styleImage: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 150,
+      height: responsiveWidth(150),
       position: 'absolute',
-      right: -6,
-      top: -10,
+      right: responsiveWidth(-6),
+      top: responsiveWidth(-10),
     },
   },
   {
@@ -274,18 +272,18 @@ const images = [
     styleText: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 110,
+      height: responsiveWidth(110),
       position: 'absolute',
-      left: 16,
-      top: 115,
+      left: responsiveWidth(16),
+      top: responsiveWidth(115),
     },
     styleImage: {
       minWidth: '30%',
       maxWidth: '40%',
-      height: 150,
+      height: responsiveWidth(150),
       position: 'absolute',
-      right: -6,
-      top: 0,
+      right: responsiveWidth(-6),
+      top: responsiveWidth(0),
     },
   },
 ];
@@ -412,8 +410,8 @@ function Card({type, setType}, ref) {
           }}>
           <Carousel
             layout="default"
-            sliderWidth={400}
-            itemWidth={400}
+            sliderWidth={responsiveWidth(370)}
+            itemWidth={responsiveWidth(370)}
             data={images}
             onSnapToItem={handleIndex}
             renderItem={renderItem}
@@ -440,7 +438,7 @@ export default forwardRef(Card);
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 8,
+    marginTop: responsiveWidth(8),
     alignItems: 'center',
     width: '100%',
     backgroundColor: '#FFFFFF',
@@ -450,20 +448,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   boxSelect: {
-    marginTop: 23,
+    marginTop: responsiveWidth(23),
 
-    marginBottom: 8,
+    marginBottom: responsiveWidth(8),
 
     justifyContent: 'center',
     flexDirection: 'row',
     width: '100%',
   },
   select: {
-    marginLeft: 16,
+    marginLeft: responsiveWidth(16),
   },
 
   crollView: {
-    marginBottom: 70,
+    marginBottom: responsiveWidth(70),
   },
   active: {
     borderWidth: 2,
@@ -471,35 +469,35 @@ const styles = StyleSheet.create({
     // padding: 10,
   },
   boxView: {
-    marginLeft: 6,
+    marginLeft: responsiveWidth(6),
   },
   cardAnimal: {
     minWidth: '30%',
     maxWidth: '40%',
-    height: 150,
+    height: responsiveWidth(150),
     position: 'absolute',
-    right: 0,
-    top: 5,
+    right: responsiveWidth(0),
+    top: responsiveWidth(5),
   },
   imagePagination: {
-    margin: 8,
-    width: 40,
-    height: 40,
+    margin: responsiveWidth(6),
+    width: responsiveWidth(40),
+    height: responsiveWidth(40),
   },
   boxView1: {
     flexDirection: 'row',
-    marginLeft: 50,
-    marginRight: 40,
+    marginLeft: responsiveWidth(50),
+    marginRight: responsiveWidth(40),
   },
   select: {
     borderWidth: 2,
     borderColor: 'green',
-    width: 50,
-    height: 50,
+    width: responsiveWidth(50),
+    height: responsiveWidth(50),
   },
   nextSelect: {
-    width: 50,
-    height: 50,
+    width: responsiveWidth(50),
+    height: responsiveWidth(50),
   },
   opacity0: {
     opacity: 0,
