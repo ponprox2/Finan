@@ -2,11 +2,10 @@ import {View, Text, StyleSheet} from 'react-native';
 import React, {useState, useRef} from 'react';
 import HeaderComponent from '../../component/HeaderComponent';
 import BottomComponent from '../../component/BottomComponent';
-import Card from '../Card/AnimalCard';
-// import CardAnimal from '../Animal/CardAnimal';
-import CardAnimal from '../BasicCard/index';
-import ElementCard from '../Card/ElementCard';
-import BasicCard from '../Card/BasicCard';
+import Card from '../Animal/AnimalCard';
+
+import ElementCard from '../Element/ElementCard';
+import BasicCard from '../BasicCard/BasicCard';
 export default function HomePage() {
   const [type, setType] = useState('basic');
   const ref = useRef();

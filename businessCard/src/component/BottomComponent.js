@@ -21,7 +21,6 @@ function BottomComponent(props, ref) {
     try {
       const hasPermission = await PermissionsAndroid.check(permission);
       if (hasPermission) {
-       
         return true;
       }
       const status = await PermissionsAndroid.request(permission);
@@ -35,7 +34,7 @@ function BottomComponent(props, ref) {
     if (Platform.OS === 'android' && !(await hasAndroidPermission())) {
       return;
     }
-    ref.current.capture().then(uri => {
+    ref?.current?.capture().then(uri => {
       CameraRoll.save(uri, 'photo').then(() => {
         ToastAndroid.showWithGravityAndOffset(
           'Lưu danh thiếp thành công',
@@ -52,7 +51,6 @@ function BottomComponent(props, ref) {
       return;
     }
     ref.current.capture().then(uri => {
-      console.log(uri);
       Share.open({message: 'xin chao'}).catch(err => console.log(err));
     });
   }

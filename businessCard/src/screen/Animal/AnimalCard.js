@@ -19,8 +19,8 @@ import CameraRoll from '@react-native-community/cameraroll';
 
 import CardStyle from '../../component/CardStyle';
 import {COLORS, globalStyles} from '../../constants/index';
-import BasicCard from '../BasicCard/index';
-import CardAnimal from '../Animal/CardAnimal';
+
+import CardAnimal from './CardAnimal';
 import Carousel, {Pagination} from 'react-native-snap-carousel-v4';
 import RightRat from '../../assets/icon/iconAnimal/RightRat.svg';
 import RightOX from '../../assets/icon/iconAnimal/RightOX.svg';
@@ -319,10 +319,10 @@ const renderItem = ({item, index}) => {
 
 const isOpacity = (a, b) => {
   if (a === 0 && b === 0) return true;
+  else if (a === 1 && b === 0) return true;
   else if (a === 0 && b === 1) return true;
   else if (a === 1 && b === 2) return true;
   else if (a === 14 && b === 9) return true;
-  else if (a === 14 && b === 11) return true;
   else if (a === 14 && b === 10) return true;
   return false;
 };
@@ -343,36 +343,46 @@ function Card({type, setType}, ref) {
   const carouselRef = useRef();
 
   const handleOnSnap = index => {
-    console.log(index);
-    carouselRef.current.snapToItem(index - 2);
+    carouselRef?.current?.snapToItem(index - 2);
     setActiveSlide(index - 2);
   };
+  const getStyle = (index, activeSlide) => {
+    if (index === activeSlide + 2) {
+      return styles.select;
+    }
+    if (index === activeSlide + 3) {
+      return styles.nextSelect;
+    }
+    if (index === activeSlide + 1) {
+      return styles.nextSelect;
+    }
+    if (isOpacity(index, activeSlide)) {
+      return styles.opacity0;
+    }
+  };
+  const getStyle1 = (index, activeSlide) => {
+    if (isOpacity1(index, activeSlide)) {
+      return styles.opacity0;
+    }
+  };
+  const getStyle2 = (index, activeSlide) => {
+    if (index === 14 && activeSlide === 11) {
+      return styles.opacity0;
+    }
+  };
+  //
   const RenderImage1 = ({item, index}) => {
     return (
-      <TouchableOpacity onPress={() => handleOnSnap(index)}>
+      <TouchableOpacity
+        onPress={() => handleOnSnap(index)}
+        disabled={isOpacity(index, activeSlide)}>
         <Image
           style={[
-            styles.ImagePagination,
-            index === activeSlide + 2 && {
-              borderWidth: 2,
-              borderColor: 'green',
-              width: 50,
-              height: 50,
-            },
-            index === activeSlide + 3 && {
-              width: 50,
-              height: 50,
-            },
-            index === activeSlide + 1 && {
-              width: 50,
-              height: 50,
-            },
-            isOpacity(index, activeSlide) && {
-              opacity: 0,
-            },
-            isOpacity1(index, activeSlide) && {
-              opacity: 0,
-            },
+            styles.imagePagination,
+
+            getStyle(index, activeSlide),
+            getStyle1(index, activeSlide),
+            getStyle2(index, activeSlide),
           ]}
           source={item.imageAnimal}
         />
@@ -380,7 +390,7 @@ function Card({type, setType}, ref) {
     );
   };
   const scrollToIndex = index => {
-    flatlistRef.current.scrollToIndex({animated: true, index: index});
+    flatlistRef?.current?.scrollToIndex({animated: true, index: index});
   };
   useEffect(() => {
     scrollToIndex(activeSlide);
@@ -388,7 +398,6 @@ function Card({type, setType}, ref) {
 
   const handleIndex = index => {
     setActiveSlide(index);
-    // console.log(index);
   };
   return (
     <ScrollView style={styles.crollView}>
@@ -406,7 +415,7 @@ function Card({type, setType}, ref) {
             sliderWidth={400}
             itemWidth={400}
             data={images}
-            // onSnapToItem={handleIndex}
+            onSnapToItem={handleIndex}
             renderItem={renderItem}
             ref={carouselRef}
           />
@@ -414,7 +423,7 @@ function Card({type, setType}, ref) {
 
         <CardStyle type={type} setType={setType} />
       </View>
-      <View style={[styles.BoxView1]}>
+      <View style={[styles.boxView1]}>
         <FlatList
           data={dataPagination}
           renderItem={RenderImage1}
@@ -464,7 +473,7 @@ const styles = StyleSheet.create({
   boxView: {
     marginLeft: 6,
   },
-  CardAnimal: {
+  cardAnimal: {
     minWidth: '30%',
     maxWidth: '40%',
     height: 150,
@@ -472,14 +481,27 @@ const styles = StyleSheet.create({
     right: 0,
     top: 5,
   },
-  ImagePagination: {
+  imagePagination: {
     margin: 8,
     width: 40,
     height: 40,
   },
-  BoxView1: {
+  boxView1: {
     flexDirection: 'row',
     marginLeft: 50,
     marginRight: 40,
+  },
+  select: {
+    borderWidth: 2,
+    borderColor: 'green',
+    width: 50,
+    height: 50,
+  },
+  nextSelect: {
+    width: 50,
+    height: 50,
+  },
+  opacity0: {
+    opacity: 0,
   },
 });

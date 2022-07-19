@@ -16,8 +16,8 @@ import {
 import ViewShot from 'react-native-view-shot';
 import CardStyle from '../../component/CardStyle';
 import {COLORS, globalStyles} from '../../constants/index';
-import BasicCard from '../BasicCard/index';
-import CardElement from '../Element/index';
+import BasicCard from './index';
+
 import Carousel, {Pagination} from 'react-native-snap-carousel-v4';
 
 const images = [
@@ -132,36 +132,45 @@ function BasicCards({type, setType}, ref) {
   const flatlistRef = useRef();
 
   const handleOnSnap = index => {
-    console.log(index);
-    carouselRef.current.snapToItem(index - 2);
+    
+    carouselRef?.current?.snapToItem(index - 2);
     setActiveSlide(index - 2);
   };
+
+  const getStyle = (index, activeSlide) => {
+    if (index === activeSlide + 2) {
+      return styles.select;
+    }
+    if (index === activeSlide + 3) {
+      return styles.nextSelect;
+    }
+    if (index === activeSlide + 1) {
+      return styles.nextSelect;
+    }
+    if (isOpacity(index, activeSlide)) {
+      return styles.opacity0;
+    }
+  };
+  const getStyle1 = (index, activeSlide) => {
+    if (isOpacity1(index, activeSlide)) {
+      return styles.opacity0;
+    }
+  };
+  const getStyle2 = (index, activeSlide) => {
+    if (index === 5 && activeSlide === 2) {
+      return styles.opacity0;
+    }
+  };
+
   const RenderImage1 = ({item, index}) => {
     return (
       <TouchableOpacity onPress={() => handleOnSnap(index)}>
         <Image
           style={[
-            styles.ImagePagination,
-            index === activeSlide + 2 && {
-              borderWidth: 2,
-              borderColor: 'green',
-              width: 50,
-              height: 50,
-            },
-            index === activeSlide + 3 && {
-              width: 50,
-              height: 50,
-            },
-            index === activeSlide + 1 && {
-              width: 50,
-              height: 50,
-            },
-            isOpacity(index, activeSlide) && {
-              opacity: 0,
-            },
-            isOpacity1(index, activeSlide) && {
-              opacity: 0,
-            },
+            styles.imagePagination,
+            getStyle(index, activeSlide),
+            getStyle1(index, activeSlide),
+            getStyle2(index, activeSlide),
           ]}
           source={item.imageAnimal}
         />
@@ -169,7 +178,7 @@ function BasicCards({type, setType}, ref) {
     );
   };
   const scrollToIndex = index => {
-    flatlistRef.current.scrollToIndex({animated: true, index: index});
+    flatlistRef?.current?.scrollToIndex({animated: true, index: index});
   };
   useEffect(() => {
     scrollToIndex(activeSlide);
@@ -177,7 +186,6 @@ function BasicCards({type, setType}, ref) {
 
   const handleIndex = index => {
     setActiveSlide(index);
-    setActiveSlide1(index + 1);
   };
   return (
     <ScrollView style={styles.crollView}>
@@ -195,7 +203,7 @@ function BasicCards({type, setType}, ref) {
             sliderWidth={400}
             itemWidth={400}
             data={images}
-            onSnapToItem={index => handleIndex(index)}
+            onSnapToItem={handleIndex}
             renderItem={renderItem}
             ref={carouselRef}
           />
@@ -203,7 +211,7 @@ function BasicCards({type, setType}, ref) {
 
         <CardStyle type={type} setType={setType} />
       </View>
-      <View style={[styles.BoxView1]}>
+      <View style={[styles.boxView1]}>
         <FlatList
           data={dataPagination}
           renderItem={RenderImage1}
@@ -255,22 +263,28 @@ const styles = StyleSheet.create({
   boxView: {
     marginLeft: 6,
   },
-  CardAnimal: {
-    minWidth: '30%',
-    maxWidth: '40%',
-    height: 150,
-    position: 'absolute',
-    right: 0,
-    top: 5,
-  },
-  ImagePagination: {
+
+  imagePagination: {
     margin: 8,
     width: 40,
     height: 40,
   },
-  BoxView1: {
+  boxView1: {
     flexDirection: 'row',
     marginLeft: 50,
     marginRight: 40,
+  },
+  select: {
+    borderWidth: 2,
+    borderColor: 'green',
+    width: 50,
+    height: 50,
+  },
+  nextSelect: {
+    width: 50,
+    height: 50,
+  },
+  opacity0: {
+    opacity: 0,
   },
 });
